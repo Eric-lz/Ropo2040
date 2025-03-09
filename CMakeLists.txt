@@ -57,6 +57,7 @@ pico_enable_stdio_usb(${ProjectName} 1)
 target_link_libraries(${ProjectName}
     pico_stdlib
     pico_multicore
+    hardware_pwm
     FreeRTOS-Kernel-Heap4
     )
 
