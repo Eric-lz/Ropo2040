@@ -39,7 +39,12 @@ project(Ropo2040 C CXX ASM)
 pico_sdk_init()
 
 # Add executable.
-add_executable(${ProjectName} Ropo2040.c )
+add_executable(${ProjectName} src/Ropo2040.c )
+
+# Add sources
+target_sources(${ProjectName} PRIVATE
+    src/rng_task.c
+    )
 
 pico_set_program_name(${ProjectName} "Ropo2040")
 pico_set_program_version(${ProjectName} "0.1")
@@ -58,6 +63,7 @@ target_link_libraries(${ProjectName}
 # Add the standard include files to the build
 target_include_directories(${ProjectName} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
+    ./inc
 )
 
 pico_add_extra_outputs(${ProjectName})

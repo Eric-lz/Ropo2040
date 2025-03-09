@@ -7,7 +7,10 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 
+// C
 #include <stdio.h>
+
+#include "inc/rng_task.h"
 
 // Core mask: 0b01 -> Core 0, 0b10 -> Core 1
 #define CORE_0_MASK (1 << 0)
@@ -55,26 +58,6 @@ void print_task(void *pvParameters){
     }
 }
 
-// Every second, generate new number and add to queue
-void rng_task(void *pvParameters){
-    printf("Print_Task started!\n");
-
-    int num = 0;
-
-    while(1){
-        num++;
-
-        int ret = xQueueSend(xQueue, &num, pdMS_TO_TICKS(1000));
-        printf("Number sent: %d, Core %d\n", num, get_core_num());
-
-        if(ret != pdPASS){
-            printf("Queue full!\n");
-        }
-
-        vTaskDelay(1000);
-    }
-}
-
 int main(){
     stdio_init_all();
 
@@ -87,7 +70,7 @@ int main(){
 
     // Start tasks
     xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
-    xTaskCreate(rng_task, "RNG_Task", 256, NULL, 1, &rng_task_handle);
+    xTaskCreate(rng_task, "RNG_Task", 256, (void*) xQueue, 1, &rng_task_handle);
     xTaskCreate(print_task, "Print_Task", 256, NULL, 1, &print_task_handle);
     
     // Pin task to core (has to be done before starting scheduler)
