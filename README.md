@@ -15,14 +15,20 @@ This project involves taking a broken robot vacuum cleaner and rewiring all its 
 
 # Software
 
-As mentioned above, the RP2040 is running FreeRTOS.
+As mentioned above, the RP2040 is running FreeRTOS with heap4 memory management.
+
 I'm still working out the folder structure and CMake.
+
+### Files
+- **src/Ropo2040.c** -> Entry point of the code
+- **inc/FreeRTOSConfig.h** -> FreeRTOS configuration file
+- **lib/** -> External libraries folder, including the FreeRTOS kernel
 
 The FreeRTOS kernel is included as a submodule, so make sure to clone the repository with the `--recurse-submodules` flag, or if you've already cloned it, use `git submodule init` and `git submodule update`.
 
 # Current status
 
-This is the first commit, currently the code is just some basic FreeRTOS functionality test on the RP2040.
+This is the first steps, currently the code is just some basic FreeRTOS functionality test on the RP2040.
 
 # Future Plans*
 
