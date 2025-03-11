@@ -33,6 +33,9 @@ SET(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/FreeRTOS-Kernel)
 include(pico_sdk_import.cmake)
 include(${FREERTOS_KERNEL_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
 
+# Set fastest clock speed
+SET(PICO_USE_FASTEST_SUPPORTED_CLOCK 1)
+
 project(Ropo2040 C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
