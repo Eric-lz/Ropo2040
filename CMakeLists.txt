@@ -46,7 +46,9 @@ add_executable(${ProjectName} src/Ropo2040.c )
 
 # Add sources
 target_sources(${ProjectName} PRIVATE
-    src/rng_task.c
+    src/debug.c
+    src/motor.c
+    src/encoder.c
     )
 
 pico_set_program_name(${ProjectName} "Ropo2040")
