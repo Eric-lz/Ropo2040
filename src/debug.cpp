@@ -18,7 +18,7 @@ void led_task(void *pvParameters){
     gpio_set_dir(LED_PIN, GPIO_OUT);
 
     // Blink LED
-    while (true) {
+    while (1) {
         gpio_put(LED_PIN, 1);
         vTaskDelay(100);
         gpio_put(LED_PIN, 0);
@@ -71,58 +71,58 @@ void print_task(void *pvParameters){
 
 // PWM test
 void pwm_task(void *pvParameters){
-  printf("PWM_Task started!\n");
-  
-  // Setup GPIO for PWM and Enable pin
-  gpio_set_function(PWM_PIN, GPIO_FUNC_PWM);
-  gpio_init(EN_PIN);
-  gpio_set_dir(EN_PIN, GPIO_OUT);
-  gpio_put(EN_PIN, 1);
+    printf("PWM_Task started!\n");
 
-  uint slice_num = pwm_gpio_to_slice_num(PWM_PIN);
-  uint chan = pwm_gpio_to_channel(PWM_PIN);
-  uint freq = 1000;
-  uint duty = 10;
+    // Setup GPIO for PWM and Enable pin
+    gpio_set_function(PWM_PIN, GPIO_FUNC_PWM);
+    gpio_init(EN_PIN);
+    gpio_set_dir(EN_PIN, GPIO_OUT);
+    gpio_put(EN_PIN, 1);
 
-  pwm_set_freq_duty(slice_num, chan, freq, duty);
-  pwm_set_enabled(slice_num, true);
-  
-  while(1){
-      // Increase duty cycle by 10% every seconds
-      duty += 1;
+    uint slice_num = pwm_gpio_to_slice_num(PWM_PIN);
+    uint chan = pwm_gpio_to_channel(PWM_PIN);
+    uint freq = 1000;
+    uint duty = 10;
 
-      // Reset duty cycle to 0% after reaching 100%
-      if(duty > 25){
-          duty = 18;
-      }
+    pwm_set_freq_duty(slice_num, chan, freq, duty);
+    pwm_set_enabled(slice_num, true);
 
-      printf("Setting duty cycle to %d\n", duty);
-      pwm_set_freq_duty(slice_num, chan, freq, duty);
+    while(1){
+        // Increase duty cycle by 10% every seconds
+        duty += 1;
 
-      vTaskDelay(2000);
-  }
+        // Reset duty cycle to 0% after reaching 100%
+        if(duty > 25){
+            duty = 18;
+        }
+
+        printf("Setting duty cycle to %d\n", duty);
+        pwm_set_freq_duty(slice_num, chan, freq, duty);
+
+        vTaskDelay(2000);
+    }
 }
 
 // Print encoder pulse count
 void print_speed(void *pvParameters){
-  printf("Print_Speed started!\n");
+    printf("Print_Speed started!\n");
 
-  // Get queue handle from parameter
-  QueueHandle_t xQEncoder = *(QueueHandle_t*) pvParameters;
+    // Get queue handle from parameter
+    QueueHandle_t xQEncoder = *(QueueHandle_t*) pvParameters;
 
-  uint16_t speed = 0;
+    uint16_t speed = 0;
 
-  while(1){
-      uint16_t count;
-      int ret = xQueuePeek(xQEncoder, &count, pdMS_TO_TICKS(10));
-      speed += count;
-      if(ret == pdPASS){
-          printf("Speed: %d\n", speed);
-      }
-      else{
-          printf("Queue empty!\n");
-      }
+    while(1){
+        uint16_t count;
+        int ret = xQueueReceive(xQEncoder, &count, portMAX_DELAY);
+        speed += count;
+        if(ret == pdPASS){
+            printf("Speed: %d\n", speed);
+        }
+        else{
+            printf("Queue empty!\n");
+        }
 
-      vTaskDelay(100);
-  }
+        vTaskDelay(100);
+    }
 }

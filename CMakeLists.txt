@@ -41,14 +41,18 @@ project(Ropo2040 C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
+# Add INA219 driver cloned into lib/
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/INA219)
+
 # Add executable.
-add_executable(${ProjectName} src/Ropo2040.c )
+add_executable(${ProjectName} src/Ropo2040.cpp)
 
 # Add sources
 target_sources(${ProjectName} PRIVATE
-    src/debug.c
-    src/motor.c
-    src/encoder.c
+    src/debug.cpp
+    src/motor.cpp
+    src/encoder.cpp
+    src/current.cpp
     )
 
 pico_set_program_name(${ProjectName} "Ropo2040")
@@ -64,6 +68,7 @@ target_link_libraries(${ProjectName}
     pico_multicore
     hardware_pwm
     FreeRTOS-Kernel-Heap4
+    ina219
     )
 
 # Add the standard include files to the build
