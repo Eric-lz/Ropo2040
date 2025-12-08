@@ -14,7 +14,7 @@ typedef struct {
 
     // Output Limits
     float output_min;      // e.g., 0 (PWM off)
-    float output_max;      // e.g., 65535 (PWM full speed)
+    float output_max;      // e.g., 100 (PWM full speed)
     float max_integral;    // Anti-windup limit
     
 } PID_Controller_t;

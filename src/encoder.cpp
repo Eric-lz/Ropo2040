@@ -36,7 +36,7 @@ void pulse_task(void *pvParameters){
     // Save pulse count of previous iteration
     uint16_t last_count = 0;
 
-    TickType_t xLastWakeTime = xTaskGetTickCount();
+    TickType_t last_wake_time = xTaskGetTickCount();
 
     while(1){
         // Get current pulse count
@@ -59,6 +59,6 @@ void pulse_task(void *pvParameters){
             last_count = pulse_count;
         }
 
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(100));
+        vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(100));
     }
 }

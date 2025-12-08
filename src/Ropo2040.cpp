@@ -49,7 +49,7 @@ int main(){
     // Motor
     // xTaskCreate(pwm_task, "PWM_Task", 256, NULL, 1, NULL);
     // xTaskCreate(oneturn_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
-    xTaskCreate(oneturnpid_task, "OneTurnPID_Task", 256, (void*) &xQEncoder, 5, NULL);
+    xTaskCreate(const_speed_task, "ConstSpeed_Task", 256, (void*) &xQEncoder, 5, NULL);
 
     // Pin task to core (has to be done before starting scheduler)
     // If task is not pinned, the scheduler will assign it to a core
