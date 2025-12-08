@@ -44,9 +44,12 @@ int main(){
     //xTaskCreate(print_task, "Print_Task", 256, (void*) xQueue, 1, &print_task_handle);
     xTaskCreate(pulse_task, "Pulse_Task", 256, (void*) &xQEncoder, 4, NULL);
     // xTaskCreate(pulse_pin, "Pulse_Pin", 256, NULL, 4, NULL);
-    // xTaskCreate(print_speed, "Print_Speed", 256, (void*) &xQEncoder, 4, NULL);
+    // xTaskCreate(print_speed, "Print_Speed", 256, (void*) &xQEncoder, 5, NULL);
+    
+    // Motor
     // xTaskCreate(pwm_task, "PWM_Task", 256, NULL, 1, NULL);
-    xTaskCreate(oneturn_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
+    // xTaskCreate(oneturn_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
+    xTaskCreate(oneturnpid_task, "OneTurnPID_Task", 256, (void*) &xQEncoder, 5, NULL);
 
     // Pin task to core (has to be done before starting scheduler)
     // If task is not pinned, the scheduler will assign it to a core

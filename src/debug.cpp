@@ -89,17 +89,17 @@ void pwm_task(void *pvParameters){
 
     while(1){
         // Increase duty cycle by 10% every seconds
-        duty += 1;
+        duty += 10;
 
         // Reset duty cycle to 0% after reaching 100%
-        if(duty > 25){
-            duty = 18;
+        if(duty > 100){
+            duty = 10;
         }
 
         printf("Setting duty cycle to %d\n", duty);
         pwm_set_freq_duty(slice_num, chan, freq, duty);
 
-        vTaskDelay(2000);
+        vTaskDelay(5000);
     }
 }
 
@@ -114,8 +114,9 @@ void print_speed(void *pvParameters){
 
     while(1){
         uint16_t count;
-        int ret = xQueueReceive(xQEncoder, &count, portMAX_DELAY);
-        speed += count;
+        int ret = xQueuePeek(xQEncoder, &count, portMAX_DELAY);
+        speed = count;  // speed
+        // speed += count; // distance
         if(ret == pdPASS){
             printf("Speed: %d\n", speed);
         }

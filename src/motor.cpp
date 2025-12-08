@@ -1,5 +1,6 @@
 #include "config.h"
 #include "motor.h"
+#include "pid.h"
 
 #include "FreeRTOS.h"
 #include "pico/stdlib.h"
@@ -73,15 +74,15 @@ void oneturn_task(void *pvParameters){
             }
         }
         else if(state == 2){
-            if(total_pulses > 993){
+            if(total_pulses > 990){
                 state = 3;
             }
         }
         else if(state == 3){
             // Stop motor
             gpio_put(EN_PIN, 0);
+            vTaskDelay(10);
             state = 0;
-            
             printf("Done. Waiting 2 seconds... %d\n", total_pulses);
             vTaskDelay(1000);
         }
@@ -108,7 +109,35 @@ void oneturnpid_task(void *pvParameters){
     pwm_set_freq_duty(slice_num, chan, freq, duty);
     pwm_set_enabled(slice_num, true);
 
+    // Create PID config strut
+    PID_Controller_t motorPID;
+
+    // Initialize PIDs (Start with Kp=1.0, Ki=0.0, Kd=0.0 and tune later)
+    pid_init(&motorPID,  0.1f, 0.3f, 0.0f, 0, 100);
+    
+    uint16_t target_speed_ticks = 60.0; // Example: We want 50 ticks per 10ms
+
     uint16_t pulses;
     uint16_t total_pulses = 0;
 
+    // delay start
+    vTaskDelay(5000);
+
+    while(true) {
+        // Wait for synchronized sensor data
+        int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
+
+        if (ret == pdPASS) {
+            // 1. Calculate PID Output
+            uint16_t pwm_val = pid_calculate(&motorPID, (float)target_speed_ticks, (float)pulses);
+            printf("%d\t%d\t%d\n", target_speed_ticks, pulses, pwm_val);
+
+            // 2. Apply to Motors
+            // pwm_set_gpio_level(PWM_PIN, pwm_val);
+            pwm_set_freq_duty(slice_num, chan, freq, pwm_val);
+            
+            // 3. Run Odometry (using received_counts)
+            // ...
+        }
+    }
 }

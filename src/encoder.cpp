@@ -36,6 +36,8 @@ void pulse_task(void *pvParameters){
     // Save pulse count of previous iteration
     uint16_t last_count = 0;
 
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+
     while(1){
         // Get current pulse count
         uint16_t pulse_count = pwm_get_counter(counter_slice);
@@ -45,7 +47,7 @@ void pulse_task(void *pvParameters){
         uint16_t delta_count = pulse_count - last_count;
 
         // Send count to queue, wait at most 10 miliseconds as that is the sample rate
-        int ret = xQueueSend(xQEncoder, &delta_count, pdMS_TO_TICKS(10));
+        int ret = xQueueSend(xQEncoder, &delta_count, 0);
         
         // If successful, update last_count. Otherwise, leave it as is.
         // This solves the problem of the queue potentially being full,
@@ -57,6 +59,6 @@ void pulse_task(void *pvParameters){
             last_count = pulse_count;
         }
 
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(100));
     }
 }
