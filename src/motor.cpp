@@ -112,35 +112,3 @@ void oneturnpid_task(void *pvParameters){
     uint16_t total_pulses = 0;
 
 }
-
-float Kp = 1.0; // Proportional gain
-float Ki = 0.1; // Integral gain
-float Kd = 0.05; // Derivative gain
-
-uint16_t setpoint = 50.0; // Desired value
-uint16_t process_variable = 0.0; // Current measured value
-uint16_t output = 0.0; // Control output
-
-float error = 0.0;
-float previous_error = 0.0;
-float integral_term = 0.0;
-float derivative_term = 0.0;
-
-uint64_t last_time_us = 0; // For calculating delta_t
-
-float calculate_pid(float current_pv) {
-    uint64_t current_time_us = time_us_64();
-    float delta_t = (float)(current_time_us - last_time_us) / 1000000.0f; // Convert to seconds
-    last_time_us = current_time_us;
-
-    error = setpoint - current_pv;
-
-    integral_term += error * delta_t;
-    derivative_term = (error - previous_error) / delta_t;
-
-    output = (Kp * error) + (Ki * integral_term) + (Kd * derivative_term);
-
-    previous_error = error;
-
-    return output;
-}
