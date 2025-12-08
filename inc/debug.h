@@ -14,3 +14,5 @@ void pwm_task(void *pvParameters);
 
 // Print encoder pulse count
 void print_speed(void *pvParameters);
+
+void pulse_pin(void *pvParameters);

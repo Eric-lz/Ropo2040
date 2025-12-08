@@ -39,10 +39,11 @@ int main(){
 
     // Start tasks
     xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
-    xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
+    // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
     //xTaskCreate(rng_task, "RNG_Task", 256, (void*) xQueue, 1, &rng_task_handle);
     //xTaskCreate(print_task, "Print_Task", 256, (void*) xQueue, 1, &print_task_handle);
     xTaskCreate(pulse_task, "Pulse_Task", 256, (void*) &xQEncoder, 5, NULL);
+    // xTaskCreate(pulse_pin, "Pulse_Pin", 256, NULL, 4, NULL);
     // xTaskCreate(print_speed, "Print_Speed", 256, (void*) &xQEncoder, 4, NULL);
     // xTaskCreate(pwm_task, "PWM_Task", 256, NULL, 1, NULL);
     xTaskCreate(oneturn_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);

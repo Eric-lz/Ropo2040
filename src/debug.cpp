@@ -123,6 +123,32 @@ void print_speed(void *pvParameters){
             printf("Queue empty!\n");
         }
 
-        vTaskDelay(100);
+        vTaskDelay(500);
+    }
+}
+
+void pulse_pin(void *pvParameters){
+    printf("Pulse_Pin started!\n");
+    gpio_init(TEST_PIN);
+    gpio_set_dir(TEST_PIN, GPIO_OUT);
+    gpio_put(TEST_PIN, true);
+
+    printf("Delaying Pulse_Pin start\n");
+    vTaskDelay(pdMS_TO_TICKS(5000));
+
+    const int count = 1000;
+    const int delay = 1;
+    
+    while(true){
+        printf("TEST_PIN START\n");
+        for (int i = 0; i < count; i++){
+            gpio_put(TEST_PIN, false);
+            vTaskDelay(pdMS_TO_TICKS(delay/2));
+            gpio_put(TEST_PIN, true);
+            vTaskDelay(pdMS_TO_TICKS(delay/2));
+        }
+        printf("TEST_PIN END\n");
+
+        vTaskDelay(pdMS_TO_TICKS(5000));
     }
 }

@@ -6,6 +6,7 @@
 #define PULSE_PIN 3 // encoder pin
 #define PWM_PIN 8   // rpwm or lpwm
 #define EN_PIN 1    // r_en l_en
+#define TEST_PIN 28
 
 // I2C
 #define I2C_FREQ_KHZ 400
