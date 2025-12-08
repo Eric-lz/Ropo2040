@@ -47,6 +47,13 @@ void oneturn_task(void *pvParameters){
     uint start_duty = 50;
 
     while(1){
+        if(state != 0){
+            int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
+            if (ret == pdPASS){
+                total_pulses += pulses;
+            }
+        }
+
         if(state == 0){
             printf("Turning... %d\n", start_duty);
 
@@ -59,9 +66,6 @@ void oneturn_task(void *pvParameters){
             state = 1;
         }
         else if(state == 1){
-            int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
-            total_pulses += pulses;
-            
             if(total_pulses > 900){
                 duty = 20;
                 pwm_set_freq_duty(slice_num, chan, freq, duty);
@@ -69,11 +73,7 @@ void oneturn_task(void *pvParameters){
             }
         }
         else if(state == 2){
-            if(total_pulses < 993){
-                int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);    
-                total_pulses += pulses;
-            }
-            else{
+            if(total_pulses > 993){
                 state = 3;
             }
         }
@@ -81,10 +81,7 @@ void oneturn_task(void *pvParameters){
             // Stop motor
             gpio_put(EN_PIN, 0);
             state = 0;
-
-            int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
-            total_pulses += pulses;
-
+            
             printf("Done. Waiting 2 seconds... %d\n", total_pulses);
             vTaskDelay(1000);
         }
