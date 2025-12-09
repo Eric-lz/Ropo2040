@@ -122,7 +122,8 @@ void const_speed_task(void *pvParameters){
 
     // Initialize PID
     PID_Controller_t Motor_PID;
-    pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0;
+    pid_init(&Motor_PID,  0.8f, 0.2f, 0.1f, 0, 100);    // 20 Hz loop (50 ms): kp = 0.8; ki = 0.2; kd = 0.1;
+    // pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0; no filtering
     // pid_init(&Motor_PID,  2.0f, 0.3f, 0.2f, 0, 100);    // 100 Hz loop (10 ms): kp = ?; ki = ?; kd = ?;
 
     // Filter coefficient. E.g. a value of 0.2 means "20% new reading, 80% history"
@@ -130,7 +131,8 @@ void const_speed_task(void *pvParameters){
 
     uint16_t pulses = 0;
     uint16_t total_pulses = 0;
-    float target_speed = 60.0;
+    int speed_flag = 0;
+    float target_speed = 5.0;
     float filtered_pulses = 0;
 
     // delay start
@@ -150,8 +152,11 @@ void const_speed_task(void *pvParameters){
             // Apply to Motor
             pwm_set_duty(&Motor, pwm_val);
 
+            // Increment odometer
+            total_pulses += pulses;
+
             // Plot data to BSP
-            printf("%d\t%.2f\t%d\t%d\n", target_speed, filtered_pulses, pwm_val, total_pulses);
+            printf("%f\t%f\t%d\t%d\n", target_speed, filtered_pulses, pwm_val, total_pulses);
         }
     }
 }

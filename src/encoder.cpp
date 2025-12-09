@@ -60,6 +60,6 @@ void encoder_task(void *pvParameters){
             last_count = pulse_count;
         }
 
-        vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(100));
+        vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(50));
     }
 }
