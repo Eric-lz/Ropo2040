@@ -35,7 +35,8 @@ void pwm_set_duty(PWM_Pin_t *pwm, uint duty){
     pwm_set_chan_level(pwm->slice_num, pwm->chan, pwm->wrap * duty / 100);
 }
 
-void const_speed_task(void *pvParameters){
+// Turn motor one full revolution
+void oneturnpid_task(void *pvParameters){
     printf("OneTurnPID_Task started!\n");
 
     // Get queue handle from parameter
@@ -54,7 +55,7 @@ void const_speed_task(void *pvParameters){
     PID_Controller_t Motor_PID;
     pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);
     
-    uint16_t target_speed_ticks = 60.0;
+    uint16_t target_speed = 60.0;
     uint16_t total_pulses = 0;
     uint16_t pulses;
 
@@ -62,21 +63,79 @@ void const_speed_task(void *pvParameters){
     vTaskDelay(5000);
 
     while(true) {
-        // Wait for synchronized sensor data
+        // Wait for synchronized sensor data (should arrive every 100ms according to encoder_task)
         int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
 
         if (ret == pdPASS) {
-            // Calculate PID Output
-            uint16_t pwm_val = pid_calculate(&Motor_PID, (float)target_speed_ticks, (float)pulses);
-            printf("%d\t%d\t%d\n", target_speed_ticks, pulses, pwm_val);
+            if (total_pulses < 900) {
+                target_speed = 60;
+            } else if (total_pulses < 993) {
+                target_speed = 10;
+            } else {
+                target_speed = 0;
+                total_pulses = 0;
+                pid_reset(&Motor_PID);
+                vTaskDelay(pdMS_TO_TICKS(5000));
+            }
 
-            // Apply to Motors
-            // pwm_set_freq_duty(slice_num, chan, freq, pwm_val);
+            // Calculate PID Output
+            uint16_t pwm_val = pid_calculate(&Motor_PID, (float)target_speed, (float)pulses);
+            
+            // Apply to Motor
             pwm_set_duty(&Motor, pwm_val);
+            
+            // Increment distance
+            total_pulses += pulses;
+
+            // Plot data to BSP
+            printf("%d\t%d\t%d\t%d\n", target_speed, pulses, pwm_val, total_pulses);
         }
     }
 }
 
+// Constant speed task
+void const_speed_task(void *pvParameters){
+    printf("ConstSpeed_Task started!\n");
+
+    // Get queue handle from parameter
+    QueueHandle_t xQEncoder = *(QueueHandle_t*) pvParameters;
+
+    // Setup GPIO for Enable pin
+    gpio_init(EN_PIN);
+    gpio_set_dir(EN_PIN, GPIO_OUT);
+    gpio_put(EN_PIN, 1);
+    
+    // Setup PWM pin
+    PWM_Pin_t Motor;
+    pwm_init(&Motor, PWM_PIN, 1000, 0);
+
+    // Initialize PID
+    PID_Controller_t Motor_PID;
+    pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);
+    
+    uint16_t target_speed = 60.0;
+    uint16_t total_pulses = 0;
+    uint16_t pulses;
+
+    // delay start
+    vTaskDelay(5000);
+
+    while(true) {
+        // Wait for synchronized sensor data (should arrive every 100ms according to encoder_task)
+        int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
+
+        if (ret == pdPASS) {
+            // Calculate PID Output
+            uint16_t pwm_val = pid_calculate(&Motor_PID, (float)target_speed, (float)pulses);
+            
+            // Apply to Motor
+            pwm_set_duty(&Motor, pwm_val);
+
+            // Plot data to BSP
+            printf("%d\t%d\t%d\t%d\n", target_speed, pulses, pwm_val, total_pulses);
+        }
+    }
+}
 
 // Set PWM frequency and duty cycle
 /* uint32_t pwm_set_freq_duty(uint slice_num, uint chan, uint32_t freq, int duty){
