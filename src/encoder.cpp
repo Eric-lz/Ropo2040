@@ -6,7 +6,7 @@
 #include "hardware/pwm.h"
 #include "queue.h"
 
-void pulse_task(void *pvParameters){
+void encoder_task(void *pvParameters){
     // Initialise frequency pulse counter
     uint counter_slice;
 
@@ -38,6 +38,7 @@ void pulse_task(void *pvParameters){
 
     TickType_t last_wake_time = xTaskGetTickCount();
 
+    // Main loop
     while(1){
         // Get current pulse count
         uint16_t pulse_count = pwm_get_counter(counter_slice);

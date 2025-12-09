@@ -30,31 +30,35 @@ int main(){
     stdio_init_all();
 
     // Init queue
-    xQueue = xQueueCreate(1, sizeof(int));
+    //xQueue = xQueueCreate(1, sizeof(int));
     xQEncoder = xQueueCreate(1, sizeof(int));
 
     // Task handles
-    TaskHandle_t rng_task_handle;
-    TaskHandle_t print_task_handle;
+    //TaskHandle_t rng_task_handle;
+    //TaskHandle_t print_task_handle;
 
-    // Start tasks
-    xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
-    // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
-    //xTaskCreate(rng_task, "RNG_Task", 256, (void*) xQueue, 1, &rng_task_handle);
-    //xTaskCreate(print_task, "Print_Task", 256, (void*) xQueue, 1, &print_task_handle);
-    xTaskCreate(pulse_task, "Pulse_Task", 256, (void*) &xQEncoder, 4, NULL);
-    // xTaskCreate(pulse_pin, "Pulse_Pin", 256, NULL, 4, NULL);
-    // xTaskCreate(print_speed, "Print_Speed", 256, (void*) &xQEncoder, 5, NULL);
+    // Start tasks =======
     
+    // Encoder
+    xTaskCreate(encoder_task, "Encoder_Task", 256, (void*) &xQEncoder, 4, NULL);
+
     // Motor
     // xTaskCreate(pwm_task, "PWM_Task", 256, NULL, 1, NULL);
     // xTaskCreate(oneturn_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
     xTaskCreate(const_speed_task, "ConstSpeed_Task", 256, (void*) &xQEncoder, 5, NULL);
 
+    // Debug tasks
+    xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
+    // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
+    // xTaskCreate(rng_task, "RNG_Task", 256, (void*) xQueue, 1, &rng_task_handle);
+    // xTaskCreate(print_task, "Print_Task", 256, (void*) xQueue, 1, &print_task_handle);
+    // xTaskCreate(pulse_pin, "Pulse_Pin", 256, NULL, 4, NULL);
+    // xTaskCreate(print_speed, "Print_Speed", 256, (void*) &xQEncoder, 5, NULL);
+
     // Pin task to core (has to be done before starting scheduler)
     // If task is not pinned, the scheduler will assign it to a core
-    vTaskCoreAffinitySet(rng_task_handle, CORE_0_MASK);
-    vTaskCoreAffinitySet(print_task_handle, CORE_1_MASK);
+    // vTaskCoreAffinitySet(rng_task_handle, CORE_0_MASK);
+    // vTaskCoreAffinitySet(print_task_handle, CORE_1_MASK);
 
     // Start scheduler
     vTaskStartScheduler();
