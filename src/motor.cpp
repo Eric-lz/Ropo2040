@@ -53,13 +53,16 @@ void oneturnpid_task(void *pvParameters){
 
     // Initialize PID
     PID_Controller_t Motor_PID;
-    pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);
-    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0;
-    // 100 Hz loop (10 ms): kp = 0.0; ki = 0.0; kd = 0;
+    pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0;
+    // pid_init(&Motor_PID,  2.0f, 0.3f, 0.2f, 0, 100);    // 100 Hz loop (10 ms): kp = ?; ki = ?; kd = ?;
 
-    uint16_t target_speed = 60.0;
+    // Filter coefficient. E.g. a value of 0.2 means "20% new reading, 80% history"
+    const float alpha = 0.2f;
+
+    uint16_t pulses = 0;
     uint16_t total_pulses = 0;
-    uint16_t pulses;
+    float target_speed = 60.0;
+    float filtered_pulses = 0;
 
     // delay start
     vTaskDelay(5000);
@@ -69,7 +72,13 @@ void oneturnpid_task(void *pvParameters){
         int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
 
         if (ret == pdPASS) {
-            if (total_pulses < 900) {
+            // Filter pulses
+            filtered_pulses = (alpha * (float)pulses) + ((1.0 - alpha) * filtered_pulses);
+
+            // Increment distance
+            total_pulses += pulses;
+
+            if (total_pulses < 800) {
                 target_speed = 60;
             } else if (total_pulses < 993) {
                 target_speed = 10;
@@ -77,20 +86,20 @@ void oneturnpid_task(void *pvParameters){
                 target_speed = 0;
                 total_pulses = 0;
                 pid_reset(&Motor_PID);
-                vTaskDelay(pdMS_TO_TICKS(5000));
             }
 
             // Calculate PID Output
-            uint16_t pwm_val = pid_calculate(&Motor_PID, (float)target_speed, (float)pulses);
+            uint16_t pwm_val = pid_calculate(&Motor_PID, target_speed, filtered_pulses);
             
             // Apply to Motor
             pwm_set_duty(&Motor, pwm_val);
             
-            // Increment distance
-            total_pulses += pulses;
-
             // Plot data to BSP
             printf("%d\t%d\t%d\t%d\n", target_speed, pulses, pwm_val, total_pulses);
+
+            if (total_pulses >= 993){
+                vTaskDelay(pdMS_TO_TICKS(5000));
+            }
         }
     }
 }
@@ -116,13 +125,13 @@ void const_speed_task(void *pvParameters){
     pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0;
     // pid_init(&Motor_PID,  2.0f, 0.3f, 0.2f, 0, 100);    // 100 Hz loop (10 ms): kp = ?; ki = ?; kd = ?;
 
-    uint16_t target_speed = 60.0;
-    uint16_t pulses = 0;
-    uint16_t total_pulses = 0;
-    float filtered_pulses = 0;
-
     // Filter coefficient. E.g. a value of 0.2 means "20% new reading, 80% history"
     const float alpha = 0.2f;
+
+    uint16_t pulses = 0;
+    uint16_t total_pulses = 0;
+    float target_speed = 60.0;
+    float filtered_pulses = 0;
 
     // delay start
     vTaskDelay(5000);
@@ -132,12 +141,11 @@ void const_speed_task(void *pvParameters){
         int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
 
         if (ret == pdPASS) {
-
             // Filter pulses
             filtered_pulses = (alpha * (float)pulses) + ((1.0 - alpha) * filtered_pulses);
 
             // Calculate PID Output
-            uint16_t pwm_val = pid_calculate(&Motor_PID, (float)target_speed, (float)pulses);
+            uint16_t pwm_val = pid_calculate(&Motor_PID, target_speed, filtered_pulses);
             
             // Apply to Motor
             pwm_set_duty(&Motor, pwm_val);
