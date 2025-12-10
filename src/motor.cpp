@@ -53,15 +53,18 @@ void oneturnpid_task(void *pvParameters){
 
     // Initialize PID
     PID_Controller_t Motor_PID;
-    pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0;
+    pid_init(&Motor_PID,  0.8f, 0.2f, 0.1f, 0, 100);    // 20 Hz loop (50 ms): kp = 0.8; ki = 0.2; kd = 0.1;
+    // pid_init(&Motor_PID,  0.1f, 0.3f, 0.0f, 0, 100);    // 10 Hz loop (100 ms): kp = 0.1; ki = 0.3; kd = 0; no filtering
     // pid_init(&Motor_PID,  2.0f, 0.3f, 0.2f, 0, 100);    // 100 Hz loop (10 ms): kp = ?; ki = ?; kd = ?;
 
     // Filter coefficient. E.g. a value of 0.2 means "20% new reading, 80% history"
     const float alpha = 0.2f;
 
     uint16_t pulses = 0;
-    uint16_t total_pulses = 0;
-    float target_speed = 60.0;
+    int16_t total_pulses = 0;
+    int16_t extra_pulses = 0;
+    uint16_t overshoot_pulses = 0;
+    float target_speed = 10.0;
     float filtered_pulses = 0;
 
     // delay start
@@ -70,39 +73,39 @@ void oneturnpid_task(void *pvParameters){
     while(true) {
         // Wait for synchronized sensor data (should arrive every 100ms according to encoder_task)
         int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
+        uint16_t pwm_val;
 
         if (ret == pdPASS) {
-            // Filter pulses
-            filtered_pulses = (alpha * (float)pulses) + ((1.0 - alpha) * filtered_pulses);
-
-            // Increment distance
-            total_pulses += pulses;
-
-            if (total_pulses < 800) {
-                target_speed = 60;
-            } else if (total_pulses < 993) {
+            // Increment odometer
+            if (total_pulses >= 968) {
+                target_speed = 0.0;
+                pid_reset(&Motor_PID);
+                pwm_set_duty(&Motor, 0);
+                // overshoot_pulses += pulses;
+                vTaskDelay(pdMS_TO_TICKS(2000));
+                int ret = xQueueReceive(xQEncoder, &pulses, portMAX_DELAY);
+                total_pulses += pulses;
+                extra_pulses = PULSES_PER_TURN - total_pulses;
+                total_pulses = -extra_pulses;
                 target_speed = 10;
             } else {
-                target_speed = 0;
-                total_pulses = 0;
-                pid_reset(&Motor_PID);
-            }
+                // Filter pulses
+                filtered_pulses = (alpha * (float)pulses) + ((1.0 - alpha) * filtered_pulses);
 
-            // Calculate PID Output
-            uint16_t pwm_val = pid_calculate(&Motor_PID, target_speed, filtered_pulses);
-            
-            // Apply to Motor
-            pwm_set_duty(&Motor, pwm_val);
+                // Calculate PID Output
+                pwm_val = pid_calculate(&Motor_PID, target_speed, filtered_pulses);
+                
+                // Apply to Motor
+                pwm_set_duty(&Motor, pwm_val);
+                total_pulses += pulses;
+            }
             
             // Plot data to BSP
-            printf("%d\t%d\t%d\t%d\n", target_speed, pulses, pwm_val, total_pulses);
-
-            if (total_pulses >= 993){
-                vTaskDelay(pdMS_TO_TICKS(5000));
-            }
+            printf("%f\t%f\t%d\t%d\t%d\n", target_speed, filtered_pulses, pwm_val, total_pulses, -extra_pulses);
         }
     }
 }
+
 
 // Constant speed task
 void const_speed_task(void *pvParameters){
@@ -131,7 +134,6 @@ void const_speed_task(void *pvParameters){
 
     uint16_t pulses = 0;
     uint16_t total_pulses = 0;
-    int speed_flag = 0;
     float target_speed = 5.0;
     float filtered_pulses = 0;
 
@@ -154,7 +156,7 @@ void const_speed_task(void *pvParameters){
 
             // Increment odometer
             total_pulses += pulses;
-
+            
             // Plot data to BSP
             printf("%f\t%f\t%d\t%d\n", target_speed, filtered_pulses, pwm_val, total_pulses);
         }

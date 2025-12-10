@@ -42,8 +42,8 @@ int main(){
     xTaskCreate(encoder_task, "Encoder_Task", 256, (void*) &xQEncoder, 4, NULL);
 
     // Motor
-    xTaskCreate(const_speed_task, "ConstSpeed_Task", 256, (void*) &xQEncoder, 5, NULL);
-    // xTaskCreate(oneturnpid_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
+    // xTaskCreate(const_speed_task, "ConstSpeed_Task", 256, (void*) &xQEncoder, 5, NULL);
+    xTaskCreate(oneturnpid_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
 
     // INA219 Current sensor
     // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
