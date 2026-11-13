@@ -13,13 +13,13 @@ void oneturn_test_task(void *pvParameters) {
     printf("OneTurn_Test started!\n");
 
     for (int32_t turn = 1; ; turn++) {
-        // Target is always computed from the start (turn N = N * 985.6 pulses,
-        // rounded), never by adding to the previous target, so the 0.6 never
+        // Target is always computed from the start (turn N = N * 1971.2 counts,
+        // rounded), never by adding to the previous target, so the 0.2 never
         // accumulates into drift.
         MotionCmd_t cmd;
-        cmd.target = wheel_turns_to_pulses(turn);
-        cmd.max_vel = 600.0f;     // pulses/s (~0.6 turns/s)
-        cmd.accel = 1500.0f;      // pulses/s^2 (reaches 600 in 0.4 s)
+        cmd.target = wheel_turns_to_counts(turn);
+        cmd.max_vel = 1200.0f;    // counts/s (~0.6 turns/s)
+        cmd.accel = 3000.0f;      // counts/s^2 (reaches 1200 in 0.4 s)
         motion_move_to(&cmd);
 
         MotionResult_t res;

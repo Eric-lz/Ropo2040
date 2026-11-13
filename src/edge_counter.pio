@@ -1,0 +1,45 @@
+; Counts BOTH rising and falling edges on one pin, with a glitch filter.
+;
+; Registers:
+;   X  = edge count. PIO can only decrement, so X goes 0, -1, -2 ...
+;        and the C code negates it.
+;   Y  = loop counter for the glitch filter
+;   JMP_PIN = the encoder pin ("jmp pin" jumps if the pin is high)
+;
+; The count is pushed to the RX FIFO continuously (noblock: if the FIFO is
+; full the push is dropped instead of stalling). The C code drains the FIFO
+; and keeps the newest value.
+;
+; Glitch filter: after the pin changes, it must stay at the new level for
+; 32 checks in a row (2 cycles each = 64 SM cycles). If it changes back
+; before that, it was a glitch and isn't counted. The C code sets the SM
+; clock so 64 cycles = ENCODER_GLITCH_FILTER_US.
+
+.program edge_counter
+
+.wrap_target
+public low:                 ; ---- Pin is LOW ----
+    mov isr, x              ; Publish current count
+    push noblock
+    jmp pin rise_check      ; Pin went high? Check it's real
+    jmp low                 ; Still low, keep waiting
+rise_check:
+    set y, 31
+rise_loop:
+    jmp pin rise_still      ; Still high?
+    jmp low                 ; Back low already: glitch, ignore
+rise_still:
+    jmp y-- rise_loop       ; Check 32 times
+    jmp x-- high            ; Stayed high: count the rising edge
+                            ; (if X was 0, falls through to `high` anyway)
+public high:                ; ---- Pin is HIGH ----
+    mov isr, x              ; Publish current count
+    push noblock
+    jmp pin high            ; Still high, keep waiting
+    set y, 31               ; Pin went low? Check it's real
+fall_loop:
+    jmp pin high            ; Back high already: glitch, ignore
+    jmp y-- fall_loop       ; Check 32 times
+    jmp x-- low             ; Stayed low: count the falling edge
+                            ; (if X was 0, falls through to .wrap -> `low`)
+.wrap

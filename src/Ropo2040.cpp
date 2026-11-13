@@ -41,8 +41,10 @@ int main(){
     xTaskCreate(control_task, "Control_Task", 512, NULL, 6, NULL);
     xTaskCreate(telemetry_task, "Telemetry_Task", 1024, NULL, 2, NULL);
 
-    // Test sequence: sends move commands to the control loop
-    xTaskCreate(oneturn_test_task, "OneTurn_Test", 1024, NULL, 3, NULL);
+    // Test sequence: sends move commands to the control loop.
+    // Commented out = hand test: the motor stays idle and the 2nd serial
+    // column shows the live encoder count. 5 turns by hand should be 9856.
+    // xTaskCreate(oneturn_test_task, "OneTurn_Test", 1024, NULL, 3, NULL);
 
     // INA219 Current sensor
     // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);

@@ -3,15 +3,15 @@
 
 // A move request: go to an absolute wheel position
 typedef struct {
-    int32_t target;     // Absolute target position [pulses]
-    float max_vel;      // Cruise speed [pulses/s]
-    float accel;        // Acceleration and deceleration [pulses/s^2]
+    int32_t target;     // Absolute target position [counts]
+    float max_vel;      // Cruise speed [counts/s]
+    float accel;        // Acceleration and deceleration [counts/s^2]
 } MotionCmd_t;
 
 // Reported when a move finishes
 typedef struct {
-    int32_t target;     // Where it was asked to go [pulses]
-    int32_t final_pos;  // Where the wheel actually stopped [pulses]
+    int32_t target;     // Where it was asked to go [counts]
+    int32_t final_pos;  // Where the wheel actually stopped [counts]
     bool timed_out;     // True if it gave up settling before reaching the tolerance
 } MotionResult_t;
 
