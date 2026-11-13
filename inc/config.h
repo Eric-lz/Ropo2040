@@ -7,8 +7,15 @@
 
 // Encoder (counted by PIO, any GPIO works)
 #define ENCODER_PIN 3
-#define ENCODER_GLITCH_FILTER_US 5   // Edges must hold this long to count. Max real
-                                     // edge rate ~6 kHz (~160 us apart), so 5 us is safe.
+// Glitch filter: a new pin level must hold this long before the edge is counted.
+// Why 25 us: while the motor is driven, the encoder counted extra edges (the wheel
+// came up short every turn), while turning it by hand counted exactly 9856 per
+// 5 turns. The likely cause is the motor current shifting the ground for the whole
+// PWM on-time (up to ~50 us at 20 kHz, ~20 us at 40% duty), which a 5 us filter
+// let through. At 25 us the one-turn test showed no drift over 10, 20 and 30 turns.
+// Upper limit: real edges are ~160 us apart at full motor speed (~6 kHz),
+// so keep this <= 60 us or real edges start being rejected.
+#define ENCODER_GLITCH_FILTER_US 25
 
 // Motor driver (BTS7960 / HW-039)
 #define MOTOR_PWM_FWD_PIN 8     // RPWM

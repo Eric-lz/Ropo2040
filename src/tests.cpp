@@ -7,12 +7,15 @@
 
 #include <stdio.h>
 
+// Number of turns before stopping (0 = run forever)
+static const int32_t TEST_TURNS = 10;
+
 void oneturn_test_task(void *pvParameters) {
     // Give time to open the serial monitor
     vTaskDelay(pdMS_TO_TICKS(5000));
-    printf("OneTurn_Test started!\n");
+    printf("OneTurn_Test started! Filter %d us\n", ENCODER_GLITCH_FILTER_US);
 
-    for (int32_t turn = 1; ; turn++) {
+    for (int32_t turn = 1; TEST_TURNS == 0 || turn <= TEST_TURNS; turn++) {
         // Target is always computed from the start (turn N = N * 1971.2 counts,
         // rounded), never by adding to the previous target, so the 0.2 never
         // accumulates into drift.
@@ -28,6 +31,10 @@ void oneturn_test_task(void *pvParameters) {
                (int)turn, (int)res.target, (int)res.final_pos,
                (int)(res.final_pos - res.target), res.timed_out ? " (timed out)" : "");
 
-        vTaskDelay(pdMS_TO_TICKS(2000));
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
+
+    // Done: the control loop stays idle (braked) and keeps printing the count
+    printf("# test done: %d turns\n", (int)TEST_TURNS);
+    vTaskDelete(NULL);
 }
