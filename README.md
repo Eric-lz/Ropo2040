@@ -5,8 +5,10 @@ This project involves taking a broken robot vacuum cleaner and rewiring all its 
 # Hardware
 
 ### **Microcontroller**: [RP2040-Zero](https://www.waveshare.com/wiki/RP2040-Zero)
+### **Motor Driver**: BTS7960 (HW-039) H-Bridge
+### **Current Sensor**: INA219 (I2C)
 ### **Sensors and Motors**: Salvaged from a very old [Ropo Glass](https://web.archive.org/web/20150526031732/http://www.ropo.com.br/) robot vacuum
-- 2 brushed DC motors with encoders
+- 2 brushed DC geared motors with optical encoders
 - Vacuum and brush motors *(I do not plan to use these)*
 - Weight-on-Wheels switch
 - 4 IR cliff sensors
@@ -15,26 +17,32 @@ This project involves taking a broken robot vacuum cleaner and rewiring all its 
 
 # Software
 
-As mentioned above, the RP2040 is running FreeRTOS with heap4 memory management.
+The firmware is written in C/C++ using the Pico SDK and runs FreeRTOS (heap4).
 
-I'm still working out the folder structure and CMake.
-
-### Files
-- **src/Ropo2040.c** -> Entry point of the code
-- **inc/FreeRTOSConfig.h** -> FreeRTOS configuration file
-- **lib/** -> External libraries folder, including the FreeRTOS kernel
+### Structure
+- **src/Ropo2040.cpp** -> Application entry point and FreeRTOS task setup
+- **src/control.cpp** -> Closed-loop wheel position controller and motion profiling
+- **src/encoder.cpp** & **src/edge_counter.pio** -> PIO-based wheel encoder counter with glitch filtering
+- **src/motor.cpp** -> PWM motor driver control
+- **src/current.cpp** -> INA219 current sensor reading
+- **src/tests.cpp** -> Automated movement and accuracy tests
+- **inc/config.h** -> Pinout and hardware configuration constants
+- **lib/** -> External libraries, including the FreeRTOS kernel and INA219 driver
 
 The FreeRTOS kernel is included as a submodule, so make sure to clone the repository with the `--recurse-submodules` flag, or if you've already cloned it, use `git submodule init` and `git submodule update`.
 
-# Current status
+# Current Status
 
-This is the first steps, currently the code is just some basic FreeRTOS functionality test on the RP2040.
+Single-wheel closed-loop position control is working reliably:
+- PIO state machine counting both encoder edges with hardware glitch filtering
+- 100 Hz motion profile and PID + feedforward position control loop
+- Multi-turn accuracy tests and live serial telemetry
 
 # Future Plans*
 
-- Integrate all sensors and motors with the RP2040-Zero
-- Develop control algorithms for autonomous operation
-- Implement additional features and improvements
+- Expand control to both drive wheels (differential drive)
+- Integrate cliff, bump, and distance sensors with the RP2040-Zero
+- Develop control algorithms for autonomous navigation
 - Create a custom PCB
 
-_*This is just a hobby project that I'm working on for fun, so I expect to abandon it unfinished at any time lol_
+_*This is just a hobby project that I'm working on for fun, so I expect to abandon it unfinished at any time._
