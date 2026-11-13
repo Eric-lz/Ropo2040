@@ -1,8 +1,5 @@
 #pragma once
 
-// Blink an LED
-void led_task(void *pvParameters);
-
 // Every second, generate new number and add to queue
 void rng_task(void *pvParameters);
 

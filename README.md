@@ -24,6 +24,7 @@ The firmware is written in C/C++ using the Pico SDK and runs FreeRTOS (heap4).
 - **src/control.cpp** -> Closed-loop wheel position controller and motion profiling
 - **src/encoder.cpp** & **src/edge_counter.pio** -> PIO-based wheel encoder counter with glitch filtering
 - **src/motor.cpp** -> PWM motor driver control
+- **src/status_led.cpp** & **src/ws2812.pio** -> PIO-based onboard WS2812 RGB status LED
 - **src/current.cpp** -> INA219 current sensor reading
 - **src/tests.cpp** -> Automated movement and accuracy tests
 - **inc/config.h** -> Pinout and hardware configuration constants

@@ -2,6 +2,7 @@
 #include "config.h"
 #include "encoder.h"
 #include "motor.h"
+#include "status_led.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -148,6 +149,7 @@ void control_task(void *pvParameters) {
             }
             i_term = 0.0f;
             state = STATE_MOVING;
+            status_set(STATUS_MOVING);
         }
 
         // ---------- 3. Profile + controller ----------
@@ -157,6 +159,7 @@ void control_task(void *pvParameters) {
                 if (profile_step(&sp_pos, &sp_vel, (float)cmd.target, cmd.max_vel, cmd.accel)) {
                     state = STATE_SETTLING;
                     settle_start = xTaskGetTickCount();
+                    status_set(STATUS_SETTLING);
                 }
             }
 
@@ -197,6 +200,7 @@ void control_task(void *pvParameters) {
                     duty = 0.0f;
                     MotionResult_t res = {cmd.target, pos, timed_out && !on_target};
                     xQueueOverwrite(result_queue, &res);
+                    status_set((timed_out && !on_target) ? STATUS_ERROR : STATUS_IDLE);
                 }
             }
         }

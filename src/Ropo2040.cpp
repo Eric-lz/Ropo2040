@@ -17,19 +17,17 @@
 #include "inc/control.h"
 #include "inc/tests.h"
 #include "inc/current.h"
+#include "inc/status_led.h"
 
 // Core mask: 0b01 -> Core 0, 0b10 -> Core 1
 #define CORE_0_MASK (1 << 0)
 #define CORE_1_MASK (1 << 1)
 
-// Create queue handle (used for communication between tasks)
-static QueueHandle_t xQueue = NULL;
 
 int main(){
     stdio_init_all();
 
-    // Create queues
-    //xQueue = xQueueCreate(1, sizeof(int));
+    // Initialize controller
     control_init();
 
     // Create task handles
@@ -49,11 +47,10 @@ int main(){
     // INA219 Current sensor
     // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
     
-    // Debug tasks
-    xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
+    // Status RGB LED task
+    xTaskCreate(status_led_task, "StatusLED_Task", 256, NULL, 1, NULL);
     // xTaskCreate(rng_task, "RNG_Task", 256, (void*) xQueue, 1, &rng_task_handle);
     // xTaskCreate(print_task, "Print_Task", 256, (void*) xQueue, 1, &print_task_handle);
-    // xTaskCreate(pulse_pin, "Pulse_Pin", 256, NULL, 4, NULL);
 
     // Pin task to core (has to be done before starting scheduler)
     // If task is not pinned, the scheduler will assign it to a core

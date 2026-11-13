@@ -2,7 +2,10 @@
 #pragma once
 
 // Pin definitions
-#define LED_PIN 14
+// Onboard WS2812 RGB status LED (Waveshare RP2040-Zero = GPIO 16)
+#define RGB_LED_PIN 16
+#define RGB_LED_BRIGHTNESS 20   // Max channel level (0..255). 20 is comfortable on the desk.
+#define RGB_LED_IS_RGB 0        // 0 = GRB byte order (standard WS2812), 1 = RGB byte order
 #define TEST_PIN 28
 
 // Encoder (counted by PIO, any GPIO works)

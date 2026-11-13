@@ -8,23 +8,6 @@
 #include "queue.h"
 #include "hardware/pwm.h"
 
-// Blink an LED
-void led_task(void *pvParameters){
-    printf("LED_Task started!\n");
-
-    // Setup GPIO
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
-
-    // Blink LED
-    while (1) {
-        gpio_put(LED_PIN, 1);
-        vTaskDelay(100);
-        gpio_put(LED_PIN, 0);
-        vTaskDelay(100);
-    }
-}
-
 // Every second, generate new number and add to queue
 void rng_task(void *pvParameters){
     printf("Print_Task started!\n");

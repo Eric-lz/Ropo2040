@@ -1,0 +1,23 @@
+; Drives a WS2812 / NeoPixel RGB LED at 800 kHz (10 SM cycles per bit).
+;
+; Bit timing (1 cycle = 125 ns at 8 MHz SM clock):
+;   '1' bit: high for T1+T2 = 7 cycles (875 ns), low for T3 = 3 cycles (375 ns)
+;   '0' bit: high for T1    = 2 cycles (250 ns), low for T2+T3 = 8 cycles (1000 ns)
+;   Reset:   when the TX FIFO is empty, `out` stalls with side-set low.
+
+.program ws2812
+.side_set 1
+
+.define public T1 2
+.define public T2 5
+.define public T3 3
+
+.wrap_target
+bitloop:
+    out x, 1       side 0 [T3 - 1] ; Shift 1 bit (stalls with pin low when FIFO empty)
+    jmp !x do_zero side 1 [T1 - 1] ; Drive high; branch on bit value
+do_one:
+    jmp bitloop    side 1 [T2 - 1] ; '1' bit: stay high for T2
+do_zero:
+    nop            side 0 [T2 - 1] ; '0' bit: go low for T2
+.wrap

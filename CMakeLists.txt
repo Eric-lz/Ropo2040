@@ -55,10 +55,12 @@ target_sources(${ProjectName} PRIVATE
     src/current.cpp
     src/control.cpp
     src/tests.cpp
+    src/status_led.cpp
     )
 
-# Assemble the PIO program into a header (edge_counter.pio.h)
+# Assemble the PIO programs into headers (edge_counter.pio.h, ws2812.pio.h)
 pico_generate_pio_header(${ProjectName} ${CMAKE_CURRENT_LIST_DIR}/src/edge_counter.pio)
+pico_generate_pio_header(${ProjectName} ${CMAKE_CURRENT_LIST_DIR}/src/ws2812.pio)
 
 pico_set_program_name(${ProjectName} "Ropo2040")
 pico_set_program_version(${ProjectName} "0.1")
