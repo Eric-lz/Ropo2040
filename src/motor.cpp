@@ -49,7 +49,7 @@ void oneturnpid_task(void *pvParameters){
     
     // Setup PWM pin
     PWM_Pin_t Motor;
-    pwm_init(&Motor, PWM_PIN, 1000, 0);
+    pwm_init(&Motor, PWM_PIN, 20000, 0);
 
     // Initialize PID
     PID_Controller_t Motor_PID;
@@ -76,7 +76,11 @@ void oneturnpid_task(void *pvParameters){
         uint16_t pwm_val;
 
         if (ret == pdPASS) {
-            // Increment odometer
+            // Increment odometer first, so every message is counted
+            // before any decision is made (otherwise this window's pulses
+            // would be lost when entering the stop branch below)
+            total_pulses += pulses;
+
             if (total_pulses >= 968) {
                 target_speed = 0.0;
                 pid_reset(&Motor_PID);
@@ -97,7 +101,6 @@ void oneturnpid_task(void *pvParameters){
                 
                 // Apply to Motor
                 pwm_set_duty(&Motor, pwm_val);
-                total_pulses += pulses;
             }
             
             // Plot data to BSP
