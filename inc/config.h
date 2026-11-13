@@ -3,10 +3,26 @@
 
 // Pin definitions
 #define LED_PIN 14
-#define PULSE_PIN 3 // encoder pin
-#define PWM_PIN 8   // rpwm or lpwm
-#define EN_PIN 1    // r_en l_en
 #define TEST_PIN 28
+
+// Encoder
+// Must be a PWM channel B pin (odd GPIO), its PWM slice is used as a pulse counter
+#define ENCODER_PIN 3
+
+// Motor driver (BTS7960 / HW-039)
+#define MOTOR_PWM_FWD_PIN 8     // RPWM
+#define MOTOR_PWM_REV_PIN -1    // LPWM. -1 = not wired (forward only). Set to 9 when wired.
+#define MOTOR_EN_PIN 1          // R_EN and L_EN tied together
+#define MOTOR_PWM_FREQ_HZ 20000
+
+// Wheel geometry
+// 16-slot encoder disc on the motor shaft x 61.6:1 gearbox = 985.6 pulses per wheel turn.
+// Stored as a fraction so it stays exact: 4928 pulses every 5 turns.
+#define WHEEL_PULSES_NUM 4928
+#define WHEEL_PULSES_DEN 5
+
+// Control loop
+#define CONTROL_PERIOD_MS 10    // 100 Hz
 
 // I2C
 #define I2C_FREQ_KHZ 400

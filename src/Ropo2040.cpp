@@ -14,8 +14,8 @@
 
 // Modules
 #include "inc/debug.h"
-#include "inc/motor.h"
-#include "inc/encoder.h"
+#include "inc/control.h"
+#include "inc/tests.h"
 #include "inc/current.h"
 
 // Core mask: 0b01 -> Core 0, 0b10 -> Core 1
@@ -24,27 +24,25 @@
 
 // Create queue handle (used for communication between tasks)
 static QueueHandle_t xQueue = NULL;
-static QueueHandle_t xQEncoder = NULL;
 
 int main(){
     stdio_init_all();
 
     // Create queues
     //xQueue = xQueueCreate(1, sizeof(int));
-    // Item size must match the type sent/received (uint16_t pulse delta)
-    xQEncoder = xQueueCreate(1, sizeof(uint16_t));
+    control_init();
 
     // Create task handles
     //TaskHandle_t rng_task_handle;
     //TaskHandle_t print_task_handle;
 
     // Start tasks =======
-    // Encoder
-    xTaskCreate(encoder_task, "Encoder_Task", 256, (void*) &xQEncoder, 4, NULL);
+    // Motor control loop: highest priority so it runs on time every 10 ms
+    xTaskCreate(control_task, "Control_Task", 512, NULL, 6, NULL);
+    xTaskCreate(telemetry_task, "Telemetry_Task", 1024, NULL, 2, NULL);
 
-    // Motor
-    // xTaskCreate(const_speed_task, "ConstSpeed_Task", 256, (void*) &xQEncoder, 5, NULL);
-    xTaskCreate(oneturnpid_task, "OneTurn_Task", 256, (void*) &xQEncoder, 5, NULL);
+    // Test sequence: sends move commands to the control loop
+    xTaskCreate(oneturn_test_task, "OneTurn_Test", 1024, NULL, 3, NULL);
 
     // INA219 Current sensor
     // xTaskCreate(print_current, "INA219_Task", 256, NULL, 1, NULL);
@@ -54,7 +52,6 @@ int main(){
     // xTaskCreate(rng_task, "RNG_Task", 256, (void*) xQueue, 1, &rng_task_handle);
     // xTaskCreate(print_task, "Print_Task", 256, (void*) xQueue, 1, &print_task_handle);
     // xTaskCreate(pulse_pin, "Pulse_Pin", 256, NULL, 4, NULL);
-    // xTaskCreate(print_speed, "Print_Speed", 256, (void*) &xQEncoder, 5, NULL);
 
     // Pin task to core (has to be done before starting scheduler)
     // If task is not pinned, the scheduler will assign it to a core

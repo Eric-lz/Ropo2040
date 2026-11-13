@@ -53,7 +53,8 @@ target_sources(${ProjectName} PRIVATE
     src/motor.cpp
     src/encoder.cpp
     src/current.cpp
-    src/pid.cpp
+    src/control.cpp
+    src/tests.cpp
     )
 
 pico_set_program_name(${ProjectName} "Ropo2040")

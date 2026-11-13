@@ -1,65 +1,34 @@
 #include "encoder.h"
-#include "config.h"
 
-#include "FreeRTOS.h"
-#include "pico/stdlib.h"
 #include "hardware/pwm.h"
-#include "queue.h"
 
-void encoder_task(void *pvParameters){
-    // Initialise frequency pulse counter
-    uint counter_slice;
+void encoder_init(Encoder_t *enc, uint pin) {
+    // A PWM slice can only count edges on its channel B pin
+    assert(pwm_gpio_to_channel(pin) == PWM_CHAN_B);
+    enc->slice = pwm_gpio_to_slice_num(pin);
 
-    // Check if pulse pin is in PWM channel B (does not work in channel A)
-    assert(pwm_gpio_to_channel(PULSE_PIN) == PWM_CHAN_B);
-    counter_slice = pwm_gpio_to_slice_num(PULSE_PIN);
+    // Pin setup. RP2040 pins start with a ~50k pull-down enabled; the encoder
+    // circuit provides its own levels, so turn the internal pulls off.
+    gpio_set_function(pin, GPIO_FUNC_PWM);
+    gpio_disable_pulls(pin);
+    gpio_set_input_hysteresis_enabled(pin, true);   // Schmitt trigger (on by default)
 
-    // Get queue handle from parameter
-    QueueHandle_t xQEncoder = *(QueueHandle_t*) pvParameters;
-
-    // Set up PWM hardware counter
-    gpio_set_function(PULSE_PIN, GPIO_FUNC_PWM);
+    // Count every falling edge on the B pin (clock divider 1 = count all of them)
     pwm_config cfg = pwm_get_default_config();
     pwm_config_set_clkdiv_mode(&cfg, PWM_DIV_B_FALLING);
     pwm_config_set_clkdiv(&cfg, 1);
-    pwm_init(counter_slice, &cfg, false);
+    pwm_init(enc->slice, &cfg, false);
 
-    // Enable Schmitt trigger and input buffer to smooth phototransistor signal
-    // UNSURE
-    gpio_set_input_hysteresis_enabled(PULSE_PIN, true);
-    gpio_set_input_enabled(PULSE_PIN, true);
+    pwm_set_counter(enc->slice, 0);
+    enc->last = 0;
+    pwm_set_enabled(enc->slice, true);
+}
 
-    // Start counter
-    pwm_set_counter(counter_slice, 0);
-    pwm_set_enabled(counter_slice, true);
-
-    // Save pulse count of previous iteration
-    uint16_t last_count = 0;
-
-    TickType_t last_wake_time = xTaskGetTickCount();
-
-    // Main loop
-    while(1){
-        // Get current pulse count
-        uint16_t pulse_count = pwm_get_counter(counter_slice);
-        // pwm_set_counter(counter_slice, 0);
-
-        // Calculate how many pulses since last iteration
-        uint16_t delta_count = pulse_count - last_count;
-
-        // Send count to queue, wait at most 10 miliseconds as that is the sample rate
-        int ret = xQueueSend(xQEncoder, &delta_count, 0);
-        
-        // If successful, update last_count. Otherwise, leave it as is.
-        // This solves the problem of the queue potentially being full,
-        // which means the pulses in this iteration of the loop would be lost.
-        // This way, the last_count value was never updated and so the next
-        // iteration would just send the pulses that missed plus however many
-        // pulses happened since the last iteration.
-        if (ret == pdPASS) {
-            last_count = pulse_count;
-        }
-
-        vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(50));
-    }
+uint16_t encoder_take_delta(Encoder_t *enc) {
+    uint16_t now = pwm_get_counter(enc->slice);
+    // Unsigned 16-bit subtraction gives the right answer even when the counter
+    // wrapped from 65535 back to 0 since the last call
+    uint16_t delta = now - enc->last;
+    enc->last = now;
+    return delta;
 }
