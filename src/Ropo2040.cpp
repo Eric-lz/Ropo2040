@@ -31,7 +31,8 @@ int main(){
 
     // Create queues
     //xQueue = xQueueCreate(1, sizeof(int));
-    xQEncoder = xQueueCreate(1, sizeof(int));
+    // Item size must match the type sent/received (uint16_t pulse delta)
+    xQEncoder = xQueueCreate(1, sizeof(uint16_t));
 
     // Create task handles
     //TaskHandle_t rng_task_handle;
