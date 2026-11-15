@@ -1,8 +1,8 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='1242' height='1081' viewBox='0 0 1242 1081'>
-<rect width='1242' height='1081' fill='#ffffff'/>
+<svg xmlns='http://www.w3.org/2000/svg' width='1498' height='1081' viewBox='0 0 1498 1081'>
+<rect width='1498' height='1081' fill='#ffffff'/>
 <text x='70.0' y='30.0' font-size='20' fill='#111' text-anchor='start' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif'>Ropo2040 logic board: SOLDER SIDE (board flipped over left to right)</text>
 <text x='70.0' y='56.0' font-size='12' fill='#a33' text-anchor='start' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif'>Column 1 is now on the RIGHT. Rows are unchanged (A at the top). This is exactly what you see when you turn the board over to solder.</text>
-<text x='70.0' y='76.0' font-size='12' fill='#444' text-anchor='start' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif'>Silver = bare tinned wire (22 AWG, insulation stripped), laid along the holes and soldered at every hole it crosses. Nothing crosses anything.</text>
+<text x='70.0' y='76.0' font-size='12' fill='#444' text-anchor='start' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif'>Silver = bare tinned wire (22 AWG, insulation stripped), laid along the holes and soldered at every hole it crosses. Nothing crosses on this side.</text>
 <rect x='70.0' y='110.0' width='1102.4' height='787.2' rx='10' fill='#d8bd85' stroke='#8a6d3b' stroke-width='2'/>
 <circle cx='1143.2' cy='139.6' r='8.0' fill='#fff' stroke='#8a6d3b'/>
 <circle cx='99.20000000000002' cy='139.6' r='8.0' fill='#fff' stroke='#8a6d3b'/>
@@ -957,77 +957,73 @@
 <text x='54.0' y='843.6' font-size='11' fill='#444' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif'>R</text>
 <text x='1188.4' y='843.6' font-size='11' fill='#444' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif'>R</text>
 <rect x='499.6' y='235.6' width='283.2' height='370.0' rx='5' fill='none' stroke='#6b5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>
-<rect x='985.2' y='564.8' width='120.0' height='157.6' rx='5' fill='none' stroke='#6b5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>
+<rect x='1053.2' y='347.6' width='348.0' height='392.0' rx='5' fill='none' stroke='#6b5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>
+<rect x='1025.2' y='164.8' width='124.0' height='157.6' rx='5' fill='none' stroke='#6b5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>
 <rect x='451.6' y='659.6' width='299.2' height='168.0' rx='5' fill='none' stroke='#6b5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>
 <text x='641.2' y='209.6' font-size='10' fill='#6b5a3a' text-anchor='middle' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' font-style='italic'>U1 RP2040-Zero (above)</text>
 <text x='601.2' y='743.6' font-size='10' fill='#6b5a3a' text-anchor='middle' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' font-style='italic'>U3 74HC14 (above)</text>
-<text x='1045.2' y='743.6' font-size='10' fill='#6b5a3a' text-anchor='middle' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' font-style='italic'>J1 (above)</text>
-<line x1='761.2' y1='243.6' x2='881.2' y2='243.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='243.6' x2='881.2' y2='243.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='243.6' x2='881.2' y2='243.6' stroke='#d62728' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='283.6' x2='881.2' y2='283.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='283.6' x2='881.2' y2='283.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='283.6' x2='881.2' y2='283.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='323.6' x2='881.2' y2='323.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='323.6' x2='881.2' y2='323.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='323.6' x2='881.2' y2='323.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='363.6' x2='881.2' y2='363.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='363.6' x2='881.2' y2='363.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='363.6' x2='881.2' y2='363.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='403.6' x2='881.2' y2='403.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='403.6' x2='881.2' y2='403.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='403.6' x2='881.2' y2='403.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='443.6' x2='881.2' y2='443.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='443.6' x2='881.2' y2='443.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='443.6' x2='881.2' y2='443.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='483.6' x2='881.2' y2='483.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='483.6' x2='881.2' y2='483.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='483.6' x2='881.2' y2='483.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='523.6' x2='881.2' y2='523.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='523.6' x2='881.2' y2='523.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='523.6' x2='881.2' y2='523.6' stroke='#17a2b8' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='563.6' x2='881.2' y2='563.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='563.6' x2='881.2' y2='563.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='563.6' x2='881.2' y2='563.6' stroke='#1f77b4' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='881.2' y1='243.6' x2='1001.2' y2='243.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='881.2' y1='243.6' x2='1001.2' y2='243.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='881.2' y1='243.6' x2='1001.2' y2='243.6' stroke='#d62728' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1001.2' y1='243.6' x2='1001.2' y2='363.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1001.2' y1='243.6' x2='1001.2' y2='363.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1001.2' y1='243.6' x2='1001.2' y2='363.6' stroke='#d62728' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1001.2' y1='483.6' x2='1001.2' y2='603.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1001.2' y1='483.6' x2='1001.2' y2='603.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1001.2' y1='483.6' x2='1001.2' y2='603.6' stroke='#ff5fb0' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1001.2' y1='603.6' x2='1041.2' y2='603.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1001.2' y1='603.6' x2='1041.2' y2='603.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1001.2' y1='603.6' x2='1041.2' y2='603.6' stroke='#ff5fb0' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='761.2' y1='283.6' x2='721.2' y2='283.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='761.2' y1='283.6' x2='721.2' y2='283.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='761.2' y1='283.6' x2='721.2' y2='283.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='721.2' y1='283.6' x2='721.2' y2='163.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='721.2' y1='283.6' x2='721.2' y2='163.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='721.2' y1='283.6' x2='721.2' y2='163.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='721.2' y1='163.6' x2='1081.2' y2='163.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='721.2' y1='163.6' x2='1081.2' y2='163.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='721.2' y1='163.6' x2='1081.2' y2='163.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1081.2' y1='163.6' x2='1081.2' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1081.2' y1='163.6' x2='1081.2' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1081.2' y1='163.6' x2='1081.2' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1081.2' y1='843.6' x2='361.20000000000005' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1081.2' y1='843.6' x2='361.20000000000005' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1081.2' y1='843.6' x2='361.20000000000005' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1081.2' y1='323.6' x2='1041.2' y2='323.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1081.2' y1='323.6' x2='1041.2' y2='323.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1081.2' y1='323.6' x2='1041.2' y2='323.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1081.2' y1='523.6' x2='1041.2' y2='523.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1081.2' y1='523.6' x2='1041.2' y2='523.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1081.2' y1='523.6' x2='1041.2' y2='523.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='1081.2' y1='683.6' x2='1041.2' y2='683.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='1081.2' y1='683.6' x2='1041.2' y2='683.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='1081.2' y1='683.6' x2='1041.2' y2='683.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='961.2' y1='683.6' x2='961.2' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='961.2' y1='683.6' x2='961.2' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='961.2' y1='683.6' x2='961.2' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<text x='1097.2' y='343.6' font-size='10' fill='#6b5a3a' text-anchor='middle' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' font-style='italic'>J1 (above)</text>
+<text x='1241.2' y='543.6' font-size='10' fill='#6b5a3a' text-anchor='middle' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round' font-style='italic'>U2 INA219 (above)</text>
+<line x1='761.2' y1='283.6' x2='841.2' y2='283.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='283.6' x2='841.2' y2='283.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='283.6' x2='841.2' y2='283.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='323.6' x2='841.2' y2='323.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='323.6' x2='841.2' y2='323.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='323.6' x2='841.2' y2='323.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='363.6' x2='841.2' y2='363.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='363.6' x2='841.2' y2='363.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='363.6' x2='841.2' y2='363.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='403.6' x2='841.2' y2='403.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='403.6' x2='841.2' y2='403.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='403.6' x2='841.2' y2='403.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='443.6' x2='841.2' y2='443.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='443.6' x2='841.2' y2='443.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='443.6' x2='841.2' y2='443.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='483.6' x2='841.2' y2='483.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='483.6' x2='841.2' y2='483.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='483.6' x2='841.2' y2='483.6' stroke='#8c8c8c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='523.6' x2='841.2' y2='523.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='523.6' x2='841.2' y2='523.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='523.6' x2='841.2' y2='523.6' stroke='#17a2b8' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='563.6' x2='841.2' y2='563.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='563.6' x2='841.2' y2='563.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='563.6' x2='841.2' y2='563.6' stroke='#1f77b4' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='761.2' y1='243.6' x2='801.2' y2='243.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='761.2' y1='243.6' x2='801.2' y2='243.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='761.2' y1='243.6' x2='801.2' y2='243.6' stroke='#d62728' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='801.2' y1='203.6' x2='841.2' y2='203.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='801.2' y1='203.6' x2='841.2' y2='203.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='801.2' y1='203.6' x2='841.2' y2='203.6' stroke='#ff5fb0' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='841.2' y1='203.6' x2='841.2' y2='243.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='841.2' y1='203.6' x2='841.2' y2='243.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='841.2' y1='203.6' x2='841.2' y2='243.6' stroke='#ff5fb0' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='841.2' y1='243.6' x2='1081.2' y2='243.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='841.2' y1='243.6' x2='1081.2' y2='243.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='841.2' y1='243.6' x2='1081.2' y2='243.6' stroke='#ff5fb0' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1081.2' y1='243.6' x2='1081.2' y2='203.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1081.2' y1='243.6' x2='1081.2' y2='203.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1081.2' y1='243.6' x2='1081.2' y2='203.6' stroke='#ff5fb0' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='841.2' y1='283.6' x2='1081.2' y2='283.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='841.2' y1='283.6' x2='1081.2' y2='283.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='841.2' y1='283.6' x2='1081.2' y2='283.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1001.2' y1='283.6' x2='1001.2' y2='483.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1001.2' y1='283.6' x2='1001.2' y2='483.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1001.2' y1='283.6' x2='1001.2' y2='483.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1001.2' y1='483.6' x2='1081.2' y2='483.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1001.2' y1='483.6' x2='1081.2' y2='483.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1001.2' y1='483.6' x2='1081.2' y2='483.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1001.2' y1='603.6' x2='1001.2' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1001.2' y1='603.6' x2='1001.2' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1001.2' y1='603.6' x2='1001.2' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1001.2' y1='843.6' x2='361.20000000000005' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1001.2' y1='843.6' x2='361.20000000000005' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1001.2' y1='843.6' x2='361.20000000000005' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1041.2' y1='403.6' x2='1001.2' y2='403.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1041.2' y1='403.6' x2='1001.2' y2='403.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1041.2' y1='403.6' x2='1001.2' y2='403.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='961.2' y1='763.6' x2='1001.2' y2='763.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='961.2' y1='763.6' x2='1001.2' y2='763.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='961.2' y1='763.6' x2='1001.2' y2='763.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
 <line x1='841.2' y1='763.6' x2='841.2' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='841.2' y1='763.6' x2='841.2' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='841.2' y1='763.6' x2='841.2' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
@@ -1046,12 +1042,21 @@
 <line x1='481.20000000000005' y1='803.6' x2='481.20000000000005' y2='843.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='481.20000000000005' y1='803.6' x2='481.20000000000005' y2='843.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='481.20000000000005' y1='803.6' x2='481.20000000000005' y2='843.6' stroke='#1a1a1a' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='881.2' y1='323.6' x2='921.2' y2='323.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='881.2' y1='323.6' x2='921.2' y2='323.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='881.2' y1='323.6' x2='921.2' y2='323.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='921.2' y1='323.6' x2='921.2' y2='763.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='921.2' y1='323.6' x2='921.2' y2='763.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='921.2' y1='323.6' x2='921.2' y2='763.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='841.2' y1='323.6' x2='921.2' y2='323.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='841.2' y1='323.6' x2='921.2' y2='323.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='841.2' y1='323.6' x2='921.2' y2='323.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='921.2' y1='323.6' x2='921.2' y2='483.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='921.2' y1='323.6' x2='921.2' y2='483.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='921.2' y1='323.6' x2='921.2' y2='483.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='921.2' y1='443.6' x2='961.2' y2='443.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='921.2' y1='443.6' x2='961.2' y2='443.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='921.2' y1='443.6' x2='961.2' y2='443.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='1041.2' y1='443.6' x2='1081.2' y2='443.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='1041.2' y1='443.6' x2='1081.2' y2='443.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='1041.2' y1='443.6' x2='1081.2' y2='443.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='921.2' y1='603.6' x2='921.2' y2='763.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='921.2' y1='603.6' x2='921.2' y2='763.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='921.2' y1='603.6' x2='921.2' y2='763.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
 <line x1='921.2' y1='683.6' x2='681.2' y2='683.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='921.2' y1='683.6' x2='681.2' y2='683.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='921.2' y1='683.6' x2='681.2' y2='683.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
@@ -1073,6 +1078,12 @@
 <line x1='321.20000000000005' y1='203.6' x2='321.20000000000005' y2='283.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='321.20000000000005' y1='203.6' x2='321.20000000000005' y2='283.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='321.20000000000005' y1='203.6' x2='321.20000000000005' y2='283.6' stroke='#e67e00' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='841.2' y1='523.6' x2='1081.2' y2='523.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='841.2' y1='523.6' x2='1081.2' y2='523.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='841.2' y1='523.6' x2='1081.2' y2='523.6' stroke='#17a2b8' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='841.2' y1='563.6' x2='1081.2' y2='563.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='841.2' y1='563.6' x2='1081.2' y2='563.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='841.2' y1='563.6' x2='1081.2' y2='563.6' stroke='#1f77b4' stroke-width='2.8000000000000003' stroke-linecap='round'/>
 <line x1='521.2' y1='243.6' x2='441.20000000000005' y2='243.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='521.2' y1='243.6' x2='441.20000000000005' y2='243.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='521.2' y1='243.6' x2='441.20000000000005' y2='243.6' stroke='#0057b8' stroke-width='2.8000000000000003' stroke-linecap='round'/>
@@ -1121,18 +1132,18 @@
 <line x1='681.2' y1='643.6' x2='881.2' y2='643.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='681.2' y1='643.6' x2='881.2' y2='643.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='681.2' y1='643.6' x2='881.2' y2='643.6' stroke='#9467bd' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='721.2' y1='563.6' x2='721.2' y2='603.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='721.2' y1='563.6' x2='721.2' y2='603.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='721.2' y1='563.6' x2='721.2' y2='603.6' stroke='#008b8b' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='721.2' y1='603.6' x2='801.2' y2='603.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='721.2' y1='603.6' x2='801.2' y2='603.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='721.2' y1='603.6' x2='801.2' y2='603.6' stroke='#008b8b' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='961.2' y1='323.6' x2='961.2' y2='523.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='961.2' y1='323.6' x2='961.2' y2='523.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='961.2' y1='323.6' x2='961.2' y2='523.6' stroke='#008b8b' stroke-width='2.8000000000000003' stroke-linecap='round'/>
-<line x1='961.2' y1='563.6' x2='961.2' y2='643.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
-<line x1='961.2' y1='563.6' x2='961.2' y2='643.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
-<line x1='961.2' y1='563.6' x2='961.2' y2='643.6' stroke='#20b2aa' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='961.2' y1='203.6' x2='881.2' y2='203.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='961.2' y1='203.6' x2='881.2' y2='203.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='961.2' y1='203.6' x2='881.2' y2='203.6' stroke='#008b8b' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='881.2' y1='363.6' x2='881.2' y2='443.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='881.2' y1='363.6' x2='881.2' y2='443.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='881.2' y1='363.6' x2='881.2' y2='443.6' stroke='#20b2aa' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='881.2' y1='603.6' x2='721.2' y2='603.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='881.2' y1='603.6' x2='721.2' y2='603.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='881.2' y1='603.6' x2='721.2' y2='603.6' stroke='#008b8b' stroke-width='2.8000000000000003' stroke-linecap='round'/>
+<line x1='721.2' y1='603.6' x2='721.2' y2='563.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
+<line x1='721.2' y1='603.6' x2='721.2' y2='563.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
+<line x1='721.2' y1='603.6' x2='721.2' y2='563.6' stroke='#008b8b' stroke-width='2.8000000000000003' stroke-linecap='round'/>
 <line x1='601.2' y1='683.6' x2='601.2' y2='723.6' stroke='#7d8288' stroke-width='13.600000000000001' stroke-linecap='round'/>
 <line x1='601.2' y1='683.6' x2='601.2' y2='723.6' stroke='#d9dde2' stroke-width='9.6' stroke-linecap='round'/>
 <line x1='601.2' y1='683.6' x2='601.2' y2='723.6' stroke='#2ca02c' stroke-width='2.8000000000000003' stroke-linecap='round'/>
@@ -1180,33 +1191,28 @@
 <circle cx='641.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='601.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='561.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='243.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='243.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='283.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='283.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='323.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='323.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='363.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='363.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='403.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='403.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='443.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='443.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='483.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='483.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='523.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='523.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='881.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='841.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1041.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1041.2' cy='683.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1001.2' cy='363.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1001.2' cy='483.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1001.2' cy='523.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1041.2' cy='523.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1041.2' cy='323.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='1001.2' cy='323.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='961.2' cy='323.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='443.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='483.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='523.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='643.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='203.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1081.2' cy='283.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='801.2' cy='243.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='801.2' cy='203.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='961.2' cy='203.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='961.2' cy='243.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='961.2' cy='283.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='441.2' cy='243.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='441.2' cy='283.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='441.2' cy='323.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
@@ -1251,12 +1257,12 @@
 <circle cx='881.2' cy='723.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='321.2' cy='683.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='321.2' cy='723.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='801.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='961.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='961.2' cy='523.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='961.2' cy='563.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='961.2' cy='643.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
-<circle cx='961.2' cy='683.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='881.2' cy='203.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='881.2' cy='363.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='881.2' cy='403.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='1041.2' cy='403.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='881.2' cy='443.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<circle cx='881.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='921.2' cy='763.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='961.2' cy='763.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='801.2' cy='803.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
@@ -1267,6 +1273,18 @@
 <circle cx='881.2' cy='683.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='201.2' cy='643.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
 <circle cx='201.2' cy='683.6' r='8.0' fill='#c4c8cd' stroke='#5f6368' stroke-width='1.2'/>
+<line x1='961.2' y1='443.6' x2='1041.2' y2='443.6' stroke='#e67e00' stroke-width='3' stroke-dasharray='6 4' stroke-opacity='0.8'/>
+<circle cx='961.2' cy='443.6' r='8.0' fill='#c4c8cd' stroke='#e67e00' stroke-width='3'/>
+<circle cx='1041.2' cy='443.6' r='8.0' fill='#c4c8cd' stroke='#e67e00' stroke-width='3'/>
+<text x='1001.2' y='457.6' font-size='8' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>JP1</text>
+<line x1='1001.2' y1='483.6' x2='1001.2' y2='603.6' stroke='#1a1a1a' stroke-width='3' stroke-dasharray='6 4' stroke-opacity='0.8'/>
+<circle cx='1001.2' cy='483.6' r='8.0' fill='#c4c8cd' stroke='#1a1a1a' stroke-width='3'/>
+<circle cx='1001.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#1a1a1a' stroke-width='3'/>
+<text x='1019.2' y='543.6' font-size='8' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>JP2</text>
+<line x1='921.2' y1='483.6' x2='921.2' y2='603.6' stroke='#e67e00' stroke-width='3' stroke-dasharray='6 4' stroke-opacity='0.8'/>
+<circle cx='921.2' cy='483.6' r='8.0' fill='#c4c8cd' stroke='#e67e00' stroke-width='3'/>
+<circle cx='921.2' cy='603.6' r='8.0' fill='#c4c8cd' stroke='#e67e00' stroke-width='3'/>
+<text x='939.2' y='543.6' font-size='8' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>JP3</text>
 <text x='761.2' y='229.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>5V</text>
 <text x='761.2' y='269.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>GND</text>
 <text x='761.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>3V3</text>
@@ -1290,33 +1308,28 @@
 <text x='641.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>GP11</text>
 <text x='601.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>GP10</text>
 <text x='561.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>GP9</text>
-<text x='881.2' y='229.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.5V</text>
 <text x='841.2' y='229.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.5V</text>
-<text x='881.2' y='269.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GND</text>
 <text x='841.2' y='269.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GND</text>
-<text x='881.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.3V3</text>
 <text x='841.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.3V3</text>
-<text x='881.2' y='349.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP29 A3</text>
-<text x='841.2' y='349.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP29 A3</text>
-<text x='881.2' y='389.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP28 A2</text>
-<text x='841.2' y='389.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP28 A2</text>
-<text x='881.2' y='429.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP27 A1</text>
-<text x='841.2' y='429.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP27 A1</text>
-<text x='881.2' y='469.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP26 A0</text>
-<text x='841.2' y='469.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.GP26 A0</text>
-<text x='881.2' y='509.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.SCL</text>
+<text x='841.2' y='349.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.A3</text>
+<text x='841.2' y='389.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.A2</text>
+<text x='841.2' y='429.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.A1</text>
+<text x='841.2' y='469.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.A0</text>
 <text x='841.2' y='509.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.SCL</text>
-<text x='881.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.SDA</text>
 <text x='841.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J9.SDA</text>
-<text x='1041.2' y='589.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J1.+</text>
-<text x='1041.2' y='669.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J1.−</text>
-<text x='1001.2' y='349.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>D1</text>
-<text x='1001.2' y='469.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>D1</text>
-<text x='1001.2' y='509.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>CB1</text>
-<text x='1041.2' y='509.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>CB1</text>
-<text x='1041.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J12.GND</text>
-<text x='1001.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J12.5V</text>
-<text x='961.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J12.S</text>
+<text x='1081.2' y='429.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>U2.VCC</text>
+<text x='1081.2' y='469.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>U2.GND</text>
+<text x='1081.2' y='509.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>U2.SCL</text>
+<text x='1081.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>U2.SDA</text>
+<text x='1081.2' y='589.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>U2.VIN−</text>
+<text x='1081.2' y='629.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>U2.VIN+</text>
+<text x='1081.2' y='189.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J1.+</text>
+<text x='1081.2' y='269.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J1.−</text>
+<text x='801.2' y='229.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>D1</text>
+<text x='801.2' y='189.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>D1</text>
+<text x='961.2' y='189.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J12.S</text>
+<text x='961.2' y='229.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J12.5V</text>
+<text x='961.2' y='269.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J12.GND</text>
 <text x='441.2' y='229.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J2.RPWM</text>
 <text x='441.2' y='269.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J2.LPWM</text>
 <text x='441.2' y='309.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>J2.R_EN</text>
@@ -1361,12 +1374,12 @@
 <text x='881.2' y='709.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R3</text>
 <text x='321.2' y='669.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R4</text>
 <text x='321.2' y='709.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R4</text>
-<text x='801.2' y='589.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R5</text>
-<text x='961.2' y='589.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R5</text>
-<text x='961.2' y='509.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R6</text>
-<text x='961.2' y='549.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R6</text>
-<text x='961.2' y='629.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R7</text>
-<text x='961.2' y='669.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R7</text>
+<text x='881.2' y='189.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R6</text>
+<text x='881.2' y='349.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R6</text>
+<text x='881.2' y='389.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R7</text>
+<text x='1041.2' y='389.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R7</text>
+<text x='881.2' y='429.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R5</text>
+<text x='881.2' y='589.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>R5</text>
 <text x='921.2' y='749.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>C1</text>
 <text x='961.2' y='749.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>C1</text>
 <text x='801.2' y='789.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>C2</text>
@@ -1377,6 +1390,6 @@
 <text x='881.2' y='669.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>C4</text>
 <text x='201.2' y='629.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>C5</text>
 <text x='201.2' y='669.2' font-size='7' fill='#000' text-anchor='middle' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif' stroke='#fff' stroke-width='3' paint-order='stroke' stroke-linejoin='round'>C5</text>
-<text x='70.0' y='967.2' font-size='13' fill='#111' text-anchor='start' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif'>65 bare links, 0 insulated wires. Order: power (GND, 3V3, 5V), then the signal lanes. Tick them off in wiring_list.md.</text>
+<text x='70.0' y='967.2' font-size='13' fill='#111' text-anchor='start' dominant-baseline='central' font-weight='bold' font-family='Segoe UI, Arial, sans-serif'>68 bare links on this side. Dashed = the 3 insulated jumpers on the component side (solder their ends here). Tick everything off in wiring_list.md.</text>
 <text x='70.0' y='991.2' font-size='12' fill='#444' text-anchor='start' dominant-baseline='central' font-weight='normal' font-family='Segoe UI, Arial, sans-serif'>Centre stripe colour = net (same colours as the pin rings on the top view).</text>
 </svg>

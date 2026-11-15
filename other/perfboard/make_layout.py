@@ -6,9 +6,9 @@ Writes:
   layout_bottom.svg  solder side, flipped left<->right (what you see while soldering)
   wiring_list.md     tick-box list of every bare link, plus the holes for every part
 
-Everything is joined with bare tinned wire on the solder side, laid along the rows
-and columns. The layout is planar: no wire crosses another, so there are no
-insulated jumpers at all.
+Everything on the solder side is bare tinned wire laid along the rows and columns.
+Where a connection must cross another, it does so on the component side: either a
+resistor lying flat over the traces, or a short straight insulated jumper.
 
 The script also checks the wiring: every bare link is merged into connected
 groups of holes, and each group must carry exactly one net from the pin list.
@@ -75,22 +75,30 @@ pins += [(15, 3 + i, f'GP{i}', RNETS[i]) for i in range(9)]
 pins += [(10 + i, 11, BNAMES[i], BNETS[i]) for i in range(5)]
 comp('U1', 'RP2040-Zero', 'mcu', pins, body=(8.46, 2.8, 15.54, 12.05), fill='#24324a')
 
-# Expansion / INA219 header: 2 x 9 male, both columns are a 1:1 copy of the RP2040 left row.
-XL = ['5V', 'GND', '3V3', 'GP29 A3', 'GP28 A2', 'GP27 A1', 'GP26 A0', 'SCL', 'SDA']
-comp('J9', 'EXPANSION + INA219', 'header2',
-     [(c, 3 + i, XL[i], LNETS[i]) for i in range(9) for c in (6, 7)],
-     body=(5.5, 2.5, 7.5, 11.5), plabel='L')
+# Expansion header: 1 x 9 male, a 1:1 copy of the RP2040 left row (its 5V pin is 5V_IN).
+XL = ['5V', 'GND', '3V3', 'A3', 'A2', 'A1', 'A0', 'SCL', 'SDA']
+XN = ['5V_IN', 'GND', '3V3', 'A3', 'A2', 'A1', 'A0', 'SCL', 'SDA']
+comp('J9', 'EXPANSION', 'header', [(7, 3 + i, XL[i], XN[i]) for i in range(9)],
+     body=(6.5, 2.5, 7.5, 11.5), plabel='R')
 
-# Power entry
-comp('J1', '5V IN', 'screw', [(2, 12, '+', '5V_IN'), (2, 14, '−', 'GND')],
-     body=(0.4, 11.03, 3.4, 14.97), fill='#2a7ab0', note='from the buck-boost output')
-comp('D1', '1N5819', 'D', [(3, 6, 'K', 'VBUS'), (3, 9, 'A', '5V_IN')],
-     note='Schottky, lying flat, stripe (cathode) toward row F')
-comp('CB1', '100µ', 'CE', [(3, 10, '+', '5V_IN'), (2, 10, '−', 'GND')],
-     note='electrolytic, 5 mm diameter, ≥ 10 V')
-# RC receiver: standard servo order GND, +5V, signal (a servo plug fits straight on)
-comp('J12', 'RC iBUS', 'header', [(2, 5, 'GND', 'GND'), (3, 5, '5V', 'VBUS'), (4, 5, 'S', 'IBUS_RX')],
-     body=(1.5, 4.5, 4.5, 5.5), plabel='U')
+# INA219 module, mounted upside down (header soldered on the component side) on a 1x6 female
+# header in column 1, body hanging off the left edge. Upside down, its pins read VCC, GND, SCL,
+# SDA, VIN-, VIN+ from top to bottom, which lines SCL/SDA up with the RP2040's I2C rows.
+# VIN-/VIN+ carry battery voltage on the module: their holes here stay unconnected.
+comp('U2', 'INA219 (upside down)', 'ina',
+     [(1, 8, 'VCC', '3V3'), (1, 9, 'GND', 'GND'), (1, 10, 'SCL', 'SCL'), (1, 11, 'SDA', 'SDA'),
+      (1, 12, 'VIN−', 'NC'), (1, 13, 'VIN+', 'NC')],
+     body=(-7.0, 5.6, 1.7, 15.4), fill='#6a3d9a', plabel='R',
+     note='1x6 female header; module hangs off the left edge, components facing down')
+
+# Power entry: buck 5 V in on J1, D1 into the RP2040 5V pin
+comp('J1', '5V IN', 'screw', [(1, 2, '+', '5V_IN'), (1, 4, '−', 'GND')],
+     body=(-0.7, 1.03, 2.4, 4.97), fill='#2a7ab0', note='from the buck-boost output')
+comp('D1', '1N5819', 'DS', [(8, 3, 'K', 'VBUS'), (8, 2, 'A', '5V_IN')],
+     note='Schottky, standing: body over B-8, stripe (cathode) end up, top lead bent down into C-8')
+# RC receiver: S, 5V, GND from top to bottom (5V in the middle, so a servo plug fits)
+comp('J12', 'RC iBUS', 'header', [(4, 2, 'S', 'IBUS_RX'), (4, 3, '5V', '5V_IN'), (4, 4, 'GND', 'GND')],
+     body=(3.5, 1.5, 4.5, 4.5), plabel='R')
 
 # Motor drivers (signals only; HW-039 GND stays unconnected, see BUILD.md)
 comp('J2', 'DRIVER L', 'header',
@@ -130,8 +138,7 @@ comp('J11', 'SPARE GP7', 'header', [(21, 13, 'GP7', 'SPARE'), (21, 14, '3V3', '3
 
 # Pin-label side overrides for crowded spots: L/R = left/right of the pin, U/D = above/below.
 LBL_SIDE = {(17, 5): 'D', (18, 5): 'D', (17, 9): 'D', (18, 9): 'D',
-            (21, 13): 'U', (21, 14): 'D', (22, 13): 'U', (22, 14): 'D',
-            (2, 5): 'U', (3, 5): 'U', (4, 5): 'U'}
+            (21, 13): 'U', (21, 14): 'D', (22, 13): 'U', (22, 14): 'D'}
 
 # Passives: (ref, value, pin1, pin2, kind, body-over-hole or mounting note)
 PASSIVES = [
@@ -139,9 +146,11 @@ PASSIVES = [
     ('R2', '5k1', (18, 14, '3V3'), (18, 15, 'ENC_R_RAW'), 'R', 1),
     ('R3', '100R', (5, 15, '3V3'), (6, 15, 'LED_L'), 'R', 1),
     ('R4', '100R', (20, 14, '3V3'), (20, 15, 'LED_R'), 'R', 2),
-    ('R5', '1k', (8, 12, 'IBUS'), (4, 12, 'IBUS_DIV'), 'R', 0),  # lying flat over the 3V3 trunk
-    ('R6', '1k', (4, 10, 'IBUS_RX'), (4, 11, 'IBUS_DIV'), 'R', 2),   # iBUS divider, top
-    ('R7', '2k2', (4, 13, 'IBUS_DIV'), (4, 14, 'GND'), 'R', 1),     # iBUS divider, bottom
+    # iBUS divider and bridge. All three lie flat (10.16 mm) and each body bridges bare traces:
+    # R6 over the 5V/GND/3V3 lanes, R7 over the 3V3 and GND trunks, R5 over the I2C lanes.
+    ('R6', '1k', (6, 2, 'IBUS_RX'), (6, 6, 'IBUS_DIV'), 'R', 0),
+    ('R7', '2k2', (6, 7, 'IBUS_DIV'), (2, 7, 'GND'), 'R', 0),
+    ('R5', '1k', (6, 8, 'IBUS_DIV'), (6, 12, 'IBUS'), 'R', 0),
     ('C1', '100n', (5, 16, '3V3'), (4, 16, 'GND'), 'C', 0),
     ('C2', '1n', (8, 17, 'ENC_L_RAW'), (7, 17, 'GND'), 'C', 0),
     ('C3', '1n', (18, 17, 'ENC_R_RAW'), (19, 17, 'GND'), 'C', 0),
@@ -156,27 +165,30 @@ for ref, val, a, b, k, bo in PASSIVES:
 # Bare links on the solder side (straight runs; every hole they pass is joined).
 # --------------------------------------------------------------------------
 BARE = []
-# RP2040 left row -> both columns of J9
-for i, n in enumerate(LNETS):
-    BARE.append((n, (9, 3 + i), (6, 3 + i)))
+# RP2040 left row -> J9 (rows D-K; the 5V pin goes to D1 instead)
+for i, n in enumerate(LNETS[1:], 1):
+    BARE.append((n, (9, 3 + i), (7, 3 + i)))
 BARE += [
-    # 5V side: J9 -> column 3 -> J12 5V -> diode cathode; diode anode -> CB1 -> J1
-    ('VBUS', (6, 3), (3, 3)), ('VBUS', (3, 3), (3, 6)),
-    ('5V_IN', (3, 9), (3, 12)), ('5V_IN', (3, 12), (2, 12)),
-    # GND tree: RP2040 GND under the module, out over the top edge (row A),
-    # down the left edge (column 1), then the bottom rail (row R)
-    ('GND', (9, 4), (10, 4)), ('GND', (10, 4), (10, 1)), ('GND', (10, 1), (1, 1)),
-    ('GND', (1, 1), (1, 18)), ('GND', (1, 18), (19, 18)),
-    ('GND', (1, 5), (2, 5)), ('GND', (1, 10), (2, 10)), ('GND', (1, 14), (2, 14)),
-    ('GND', (4, 14), (4, 18)),
+    # 5V: RP2040 5V pin -> D1 cathode; D1 anode -> J9 5V -> row C lane -> J12 5V -> J1 +
+    ('VBUS', (9, 3), (8, 3)),
+    ('5V_IN', (8, 2), (7, 2)), ('5V_IN', (7, 2), (7, 3)), ('5V_IN', (7, 3), (1, 3)),
+    ('5V_IN', (1, 3), (1, 2)),
+    # GND: J9 -> row D -> trunk down column 3 -> bottom rail (row R)
+    ('GND', (7, 4), (1, 4)), ('GND', (3, 4), (3, 9)), ('GND', (3, 9), (1, 9)),
+    ('GND', (3, 12), (3, 18)), ('GND', (3, 18), (19, 18)),
+    ('GND', (2, 7), (3, 7)), ('GND', (4, 16), (3, 16)),
     ('GND', (7, 16), (7, 18)), ('GND', (19, 16), (19, 18)),
     ('GND', (10, 17), (10, 18)), ('GND', (12, 17), (12, 18)), ('GND', (14, 17), (14, 18)),
     ('GND', (16, 17), (16, 18)),
-    # 3V3, left: J9 -> trunk (column 5) -> row N -> 74HC14 VCC and pin 13
-    ('3V3', (6, 5), (5, 5)), ('3V3', (5, 5), (5, 16)), ('3V3', (5, 14), (11, 14)),
+    # 3V3, left: J9 -> trunk (column 5) -> INA219 VCC (via a jumper) -> row N -> 74HC14
+    ('3V3', (7, 5), (5, 5)), ('3V3', (5, 5), (5, 9)), ('3V3', (5, 8), (4, 8)),
+    ('3V3', (2, 8), (1, 8)),
+    ('3V3', (5, 12), (5, 16)), ('3V3', (5, 14), (11, 14)),
     # 3V3, right: under the RP2040, out over the top edge, down column 24, back along row N
     ('3V3', (9, 5), (11, 5)), ('3V3', (11, 5), (11, 2)), ('3V3', (11, 2), (24, 2)),
     ('3V3', (24, 2), (24, 14)), ('3V3', (24, 14), (18, 14)), ('3V3', (20, 2), (20, 4)),
+    # I2C: J9 straight on to the INA219
+    ('SCL', (7, 10), (1, 10)), ('SDA', (7, 11), (1, 11)),
     # motor drivers (R_EN and L_EN joined on the board)
     ('DRV_L_RPWM', (15, 3), (17, 3)), ('DRV_L_LPWM', (15, 4), (17, 4)), ('DRV_L_EN', (15, 5), (18, 5)),
     ('DRV_R_RPWM', (15, 7), (17, 7)), ('DRV_R_LPWM', (15, 8), (17, 8)), ('DRV_R_EN', (15, 9), (18, 9)),
@@ -186,11 +198,11 @@ BARE += [
     # 74HC14 outputs straight up to GP8 / GP9
     ('ENC_R', (15, 11), (16, 11)), ('ENC_R', (16, 11), (16, 14)),
     ('ENC_L', (14, 11), (14, 14)),
-    # GP12 -> WOW L; J12 signal -> column 4 -> divider R6/R7 -> R5 (lying flat over the
-    # 3V3 trunk) -> GP13
+    # GP12 -> WOW L
     ('WOW_L', (11, 11), (11, 13)), ('WOW_L', (11, 13), (6, 13)),
-    ('IBUS', (10, 11), (10, 12)), ('IBUS', (10, 12), (8, 12)),
-    ('IBUS_RX', (4, 5), (4, 10)), ('IBUS_DIV', (4, 11), (4, 13)),
+    # iBUS: J12 S -> R6 -> divider node (column 6) -> R7 to GND, R5 -> row L -> GP13
+    ('IBUS_RX', (4, 2), (6, 2)), ('IBUS_DIV', (6, 6), (6, 8)),
+    ('IBUS', (6, 12), (10, 12)), ('IBUS', (10, 12), (10, 11)),
     # encoder inputs: out from under the 74HC14 socket (between its pin rows)
     ('ENC_L_RAW', (13, 14), (13, 15)), ('ENC_L_RAW', (13, 15), (8, 15)),
     ('ENC_L_RAW', (8, 15), (8, 17)),
@@ -199,8 +211,12 @@ BARE += [
     ('LED_L', (6, 15), (6, 16)), ('LED_R', (20, 15), (20, 16)),
 ]
 
-# Straight insulated jumpers on the component side (none needed in this layout).
-JUMPERS = []
+# Straight insulated jumpers on the component side.
+JUMPERS = [
+    ('3V3', (4, 8), (2, 8)),    # INA219 VCC, over the GND trunk (H-3)
+    ('GND', (3, 9), (3, 12)),   # GND trunk, over the SCL/SDA lanes (J-3, K-3)
+    ('3V3', (5, 9), (5, 12)),   # 3V3 trunk, over the SCL/SDA lanes (J-5, K-5)
+]
 
 
 # --------------------------------------------------------------------------
@@ -299,7 +315,8 @@ def check():
 S = 40                      # px per 2.54 mm
 MX, TOP = 70, 110           # side margin, space for title
 BOT = 64                    # space below the board for labels
-W = int(MX * 2 + (EDGE_R - EDGE_L) * S)
+PAD = 6.4                   # extra canvas (hole units) for the INA219 hanging off the left edge
+W = int(MX * 2 + (EDGE_R - EDGE_L + PAD) * S)
 BOARD_H = (EDGE_B - EDGE_T) * S
 FONT = "font-family='Segoe UI, Arial, sans-serif'"
 
@@ -309,7 +326,7 @@ class V:
         self.m = mirror
 
     def x(self, c):
-        return MX + ((EDGE_R - c) if self.m else (c - EDGE_L)) * S
+        return MX + ((EDGE_R - c) if self.m else (c - EDGE_L + PAD)) * S
 
     def y(self, r):
         return TOP + (r - EDGE_T) * S
@@ -367,8 +384,9 @@ def draw_top(lead):
     out.append(txt(MX, 56, '50 x 70 mm, 24 x 18 holes, 2.54 mm pitch. Holes are named row letter + '
                    'column number (e.g. C-4). Pin rings are coloured by net.', 12, '#444', 'start',
                    halo=False))
-    out.append(txt(MX, 76, 'No 12 V on this board. No wire crossings: every connection is a bare link '
-                   'on the solder side (see layout_bottom.svg).', 12, '#a33', 'start', halo=False))
+    out.append(txt(MX, 76, 'No 12 V on this board. Bare links on the solder side (layout_bottom.svg); '
+                   'crossings are made up here by flat resistors (R5-R7) and 3 straight insulated jumpers.',
+                   12, '#a33', 'start', halo=False))
     board_and_grid(v, out)
 
     # RP2040 module
@@ -387,6 +405,26 @@ def draw_top(lead):
         out.append(txt(v.x(12), v.y(7.1), '1x8 + 1x8 (sides)', 10, '#cfd8e3', halo=False))
         out.append(txt(v.x(12), v.y(7.6), '+ 1x7 (row K)', 10, '#cfd8e3', halo=False))
         out.append(txt(v.x(12), v.y(8.5), 'GP10, GP11: unused', 9, '#cfd8e3', halo=False))
+
+    # INA219 module hanging off the left edge (upside down)
+    for cp in C:
+        if cp['kind'] != 'ina':
+            continue
+        x, y, w, h = v.rect(*cp['body'])
+        out.append(f"<rect x='{x:.1f}' y='{y:.1f}' width='{w:.1f}' height='{h:.1f}' rx='6' "
+                   f"fill='{cp['fill']}' fill-opacity='0.55' stroke='#111' stroke-width='1.5' "
+                   f"stroke-dasharray='7 4'/>")
+        tx, ty, tw, th = v.rect(-6.6, 8.2, -4.4, 12.8)
+        out.append(f"<rect x='{tx}' y='{ty}' width='{tw}' height='{th}' rx='3' fill='#2a7ab0' "
+                   f"fill-opacity='0.5' stroke='#1d5b85' stroke-dasharray='4 3'/>")
+        out.append(txt(tx + tw / 2, ty + th / 2, 'screw terminal (underneath)', 9, '#fff',
+                       halo=False, rotate=-90, weight='bold'))
+        cx = v.x(-1.6)
+        out.append(txt(cx, v.y(6.4), 'U2 INA219', 14, '#fff', weight='bold', halo=False))
+        out.append(txt(cx, v.y(7.0), 'UPSIDE DOWN', 11, '#ffe08a', weight='bold', halo=False))
+        out.append(txt(cx, v.y(13.8), 'hangs off the edge', 10, '#f0e6ff', halo=False))
+        out.append(txt(cx, v.y(14.4), '(outline approx.)', 10, '#f0e6ff', halo=False))
+        header_outline(v, out, [(0.5, 7.5, 1.5, 13.5)])
 
     # sockets / headers / screw terminal
     for cp in C:
@@ -408,16 +446,27 @@ def draw_top(lead):
             out.append(f"<rect x='{x}' y='{y}' width='{w}' height='{h}' rx='4' fill='{cp['fill']}' "
                        f"fill-opacity='0.92' stroke='#111' stroke-width='1.5'/>")
             rs = [p[1] for p in cp['pins']]
+            pc = cp['pins'][0][0]
             for r in rs:
-                ex, ey, ew, eh = v.rect(0.45, r - 0.32, 1.05, r + 0.32)
+                ex, ey, ew, eh = v.rect(pc - 1.55, r - 0.32, pc - 0.95, r + 0.32)
                 out.append(f"<rect x='{ex}' y='{ey}' width='{ew}' height='{eh}' fill='#0d2f45'/>")
             rm = sum(rs) / len(rs)
-            out.append(txt(v.x(3.0), v.y(rm), 'J1', 12, '#fff', weight='bold', halo=False, rotate=-90))
-            out.append(txt(v.x(-0.55), v.y(rm), '5V IN (from buck)', 10, '#1d5b85', weight='bold',
+            out.append(txt(v.x(pc + 0.95), v.y(rm), 'J1', 12, '#fff', weight='bold', halo=False,
+                           rotate=-90))
+            out.append(txt(v.x(pc - 2.2), v.y(rm), '5V IN (buck)', 10, '#1d5b85', weight='bold',
                            halo=False, rotate=-90))
 
     # diode, electrolytic
     for cp in C:
+        if cp['kind'] == 'DS':
+            (c1, r1, *_), (c2, r2, *_) = cp['pins']
+            out.append(f"<line x1='{v.x(c1)}' y1='{v.y(r1)}' x2='{v.x(c2)}' y2='{v.y(r2)}' "
+                       f"stroke='#777' stroke-width='3'/>")
+            bx, by = v.x(c2), v.y(r2)
+            out.append(f"<circle cx='{bx}' cy='{by}' r='{S*0.36}' fill='#222' stroke='#000'/>")
+            out.append(f"<circle cx='{bx}' cy='{by}' r='{S*0.2}' fill='none' stroke='#ddd' stroke-width='3'/>")
+            out.append(txt(bx - 17, by - 6, 'D1', 10, '#000', 'end', 'bold'))
+            out.append(txt(bx - 17, by + 6, '1N5819', 8, '#5a3d00', 'end', 'bold'))
         if cp['kind'] == 'D':
             (c1, r1, *_), (c2, r2, *_) = cp['pins']
             x, y, w, h = v.rect(c1 - 0.28, r1 + 0.55, c1 + 0.28, r2 - 0.55)
@@ -445,11 +494,17 @@ def draw_top(lead):
         out.append(f"<line x1='{x1}' y1='{y1}' x2='{x2}' y2='{y2}' stroke='#777' stroke-width='3'/>")
         if k == 'R' and bo == 0:
             mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-            bw, bh = abs(x2 - x1) - S * 1.25, S * 0.5
-            out.append(f"<rect x='{mx-bw/2}' y='{my-bh/2}' width='{bw}' height='{bh}' rx='{bh/2}' "
+            horiz = abs(x2 - x1) > abs(y2 - y1)
+            ln = max(abs(x2 - x1), abs(y2 - y1)) - S * 1.25
+            bw, bh = (ln, S * 0.5) if horiz else (S * 0.5, ln)
+            out.append(f"<rect x='{mx-bw/2}' y='{my-bh/2}' width='{bw}' height='{bh}' rx='{S*0.25}' "
                        f"fill='#e9d3a8' stroke='#6b4f1d' stroke-width='1.5'/>")
-            for i, bc in enumerate(('#8b4513', '#000', '#e53935')):   # brown black red = 1k
-                out.append(f"<rect x='{mx-bw/2+8+i*9}' y='{my-bh/2}' width='4' height='{bh}' fill='{bc}'/>")
+            bands = {'1k': ('#8b4513', '#000', '#e53935'), '2k2': ('#e53935', '#e53935', '#e53935')}
+            for i, bc in enumerate(bands.get(val, ())):
+                if horiz:
+                    out.append(f"<rect x='{mx-bw/2+8+i*9}' y='{my-bh/2}' width='4' height='{bh}' fill='{bc}'/>")
+                else:
+                    out.append(f"<rect x='{mx-bw/2}' y='{my-bh/2+8+i*9}' width='{bw}' height='4' fill='{bc}'/>")
         elif k == 'R':
             bx, by = (x1, y1) if bo == 1 else (x2, y2)
             out.append(f"<circle cx='{bx}' cy='{by}' r='{S*0.36}' fill='#e9d3a8' stroke='#6b4f1d' "
@@ -465,7 +520,7 @@ def draw_top(lead):
     for cp in C:
         for c, r, lab, net in cp['pins']:
             col = NETC.get(net, '#000')
-            if cp['kind'] in ('header', 'header2', 'screw'):
+            if cp['kind'] in ('header', 'header2', 'screw', 'ina'):
                 s = S * 0.62
                 out.append(f"<rect x='{v.x(c)-s/2:.1f}' y='{v.y(r)-s/2:.1f}' width='{s}' height='{s}' "
                            f"rx='3' fill='#c9a227' stroke='{col}' stroke-width='4'/>")
@@ -477,11 +532,15 @@ def draw_top(lead):
     # pin labels
     for cp in C:
         k, side = cp['kind'], cp['plabel']
-        if k in ('R', 'C', 'CE', 'D', 'screw'):
+        if k in ('R', 'C', 'CE', 'D', 'DS', 'screw'):
             continue
         for c, r, lab, net in cp['pins']:
             x, y = v.x(c), v.y(r)
-            if k == 'mcu':
+            if k == 'ina':
+                col = '#ffb3b3' if 'VIN' in lab else '#fff'
+                out.append(txt(x - 16, y, lab + (' (12 V, no trace)' if 'VIN' in lab else ''), 9, col,
+                               'end', halo=False, weight='bold'))
+            elif k == 'mcu':
                 if c == 9:
                     out.append(txt(x + 15, y, lab, 9, '#fff', 'start', halo=False, weight='bold'))
                 elif c == 15 and r <= 10:
@@ -519,10 +578,26 @@ def draw_top(lead):
             pos = [p for p in cp['pins'] if p[2] == '+'][0]
             out.append(txt(v.x(pos[0]), v.y(pos[1]) + 15, '+', 13, '#fff', halo=False, weight='bold'))
 
+    # insulated jumpers (component side)
+    for i, (net, a, b) in enumerate(JUMPERS, 1):
+        x1, y1, x2, y2 = v.x(a[0]), v.y(a[1]), v.x(b[0]), v.y(b[1])
+        out.append(f"<line x1='{x1}' y1='{y1}' x2='{x2}' y2='{y2}' stroke='#000' stroke-width='{S*0.26}' "
+                   f"stroke-linecap='round'/>")
+        out.append(f"<line x1='{x1}' y1='{y1}' x2='{x2}' y2='{y2}' stroke='{NETC[net]}' "
+                   f"stroke-width='{S*0.17}' stroke-linecap='round'/>")
+        for h in (a, b):
+            out.append(f"<circle cx='{v.x(h[0])}' cy='{v.y(h[1])}' r='{S*0.12}' fill='#4a3418'/>")
+        tx, ty = (x1 + x2) / 2, (y1 + y2) / 2
+        if abs(x2 - x1) > abs(y2 - y1):
+            ty += 15
+        else:
+            tx -= 20
+        out.append(txt(tx, ty, f'JP{i}', 9, '#000', weight='bold'))
+
     # reference labels
     lbl = {
-        'J9': (6.5, 1.85, 'J9 EXPANSION', 'middle'), 'J9b': (6.5, 2.3, '+ INA219', 'middle'),
-        'J12': (3.0, 3.75, 'J12 RC iBUS', 'middle'),
+        'J9': (7.3, 0.95, 'J9 EXPANSION', 'middle'),
+        'J12': (4.0, 0.95, 'J12 RC iBUS', 'middle'),
         'J2': (17.5, 2.05, 'J2 DRIVER L', 'middle'), 'J3': (17.5, 6.1, 'J3 DRIVER R', 'middle'),
         'J4': (20.7, 2.05, 'J4 DRIVER VCC', 'middle'),
         'J5': (7.0, 17.75, 'J5 ENCODER L', 'middle'), 'J6': (19.0, 17.75, 'J6 ENCODER R', 'middle'),
@@ -537,7 +612,10 @@ def draw_top(lead):
         horiz = abs(x2 - x1) > abs(y2 - y1)
         mx, my = (x1 + x2) / 2, (y1 + y2) / 2
         if k == 'R' and bo == 0:
-            out.append(txt(mx, my + 19, f'{ref} {val} (lying flat)', 8, '#000', weight='bold'))
+            if horiz:
+                out.append(txt(mx, my + 17, f'{ref} {val} (flat)', 8, '#000', weight='bold'))
+            else:
+                out.append(txt(mx - 15, my, f'{ref} {val} (flat)', 8, '#000', weight='bold', rotate=-90))
         elif k == 'R':
             bx, by = (x1, y1) if bo == 1 else (x2, y2)
             if ref in ('R3', 'R4'):
@@ -557,12 +635,12 @@ def draw_top(lead):
     ly = TOP + BOARD_H + BOT + 10
     out.append(txt(MX, ly, 'Notes', 14, '#111', 'start', 'bold', halo=False))
     notes = [
-        'Off this board: the HW-039 drivers, INA219, buck-boost, battery and motors (12 V side, on its own board).',
-        'J1 is a 5.08 mm 2-pin screw terminal, wire entry facing the left edge. All other J are 2.54 mm male pin headers.',
-        'J9 is two 1x9 headers side by side; both columns carry the same signals (INA219 on one, future sensors on the other).',
-        'R1-R4, R6, R7 stand upright (body over the beige circle). R5 lies flat from L-4 to L-8; its body bridges the 3V3 trunk at L-5.',
-        'D1 lies flat along column 3, stripe toward row F. CB1: 100 µF, 5 mm diameter, ≥ 10 V, + in J-3. C2/C3 1 nF, others 100 nF.',
-        'J12 takes a standard servo plug: GND (E-2), 5V (E-3), signal (E-4).',
+        'Off this board: HW-039 drivers, buck-boost, battery, motors. The INA219 plugs in at column 1 and hangs off the left edge.',
+        'INA219: header soldered on the COMPONENT side, module plugged in upside down. VIN-/VIN+ (battery voltage) holes stay empty of traces.',
+        'J1: 5.08 mm 2-pin screw terminal, wire entry facing the left edge. All other J are 2.54 mm male pin headers.',
+        'R1-R4 stand upright (body over the beige circle). R5, R6, R7 lie flat (10.16 mm) with their bodies over bare traces.',
+        'JP1-JP3: straight insulated 22 AWG jumpers on this side. D1 stands over B-8, stripe end up, lead bent into C-8.',
+        'J12 takes a standard servo plug: signal (B-4), 5V (C-4), GND (D-4). C2/C3 1 nF, C1/C4/C5 100 nF.',
         'Pin rings: black = GND, orange = 3V3, red = 5V after D1 (VBUS), pink = 5V from the buck before D1.',
         'Keep rows A-B in columns 9-15 clear on the top side: the USB plug comes in there.',
     ]
@@ -597,17 +675,17 @@ def draw_bottom(lead, bare_net):
                    'This is exactly what you see when you turn the board over to solder.', 12,
                    '#a33', 'start', halo=False))
     out.append(txt(MX, 76, 'Silver = bare tinned wire (22 AWG, insulation stripped), laid along the '
-                   'holes and soldered at every hole it crosses. Nothing crosses anything.', 12, '#444',
+                   'holes and soldered at every hole it crosses. Nothing crosses on this side.', 12, '#444',
                    'start', halo=False))
     board_and_grid(v, out)
 
     for cp in C:
-        if cp['body'] and cp['kind'] in ('mcu', 'dip', 'screw'):
+        if cp['body'] and cp['kind'] in ('mcu', 'dip', 'screw', 'ina'):
             x, y, w, h = v.rect(*cp['body'])
             out.append(f"<rect x='{x:.1f}' y='{y:.1f}' width='{w:.1f}' height='{h:.1f}' rx='5' "
                        f"fill='none' stroke='#6b5a3a' stroke-width='1.2' stroke-dasharray='5 4'/>")
     gl = {'U1': (12, 2.15, 'U1 RP2040-Zero (above)'), 'U3': (13, 15.5, 'U3 74HC14 (above)'),
-          'J1': (1.9, 15.5, 'J1 (above)')}
+          'J1': (0.6, 5.5, 'J1 (above)'), 'U2': (-3.0, 10.5, 'U2 INA219 (above)')}
     for ref, (c, r, s) in gl.items():
         out.append(txt(v.x(c), v.y(r), s, 10, '#6b5a3a', italic=True))
 
@@ -622,10 +700,20 @@ def draw_bottom(lead, bare_net):
     for (c, r), (ref, lab, net) in lead.items():
         out.append(f"<circle cx='{v.x(c):.1f}' cy='{v.y(r):.1f}' r='{S*0.2}' fill='#c4c8cd' "
                    f"stroke='#5f6368' stroke-width='1.2'/>")
+    for i, (net, a, b) in enumerate(JUMPERS, 1):
+        x1, y1, x2, y2 = v.x(a[0]), v.y(a[1]), v.x(b[0]), v.y(b[1])
+        out.append(f"<line x1='{x1}' y1='{y1}' x2='{x2}' y2='{y2}' stroke='{NETC[net]}' "
+                   f"stroke-width='3' stroke-dasharray='6 4' stroke-opacity='0.8'/>")
+        for h in (a, b):
+            out.append(f"<circle cx='{v.x(h[0])}' cy='{v.y(h[1])}' r='{S*0.2}' fill='#c4c8cd' "
+                       f"stroke='{NETC[net]}' stroke-width='3'/>")
+        tx, ty = (x1 + x2) / 2, (y1 + y2) / 2
+        out.append(txt(tx + (0 if abs(x2 - x1) > abs(y2 - y1) else 18), ty + (14 if abs(x2 - x1) > abs(y2 - y1) else 0),
+                       f'JP{i}', 8, '#000', weight='bold'))
     short = {}
     for cp in C:
         for c, r, lab, net in cp['pins']:
-            if cp['kind'] in ('R', 'C', 'CE', 'D'):
+            if cp['kind'] in ('R', 'C', 'CE', 'D', 'DS'):
                 short[(c, r)] = cp['ref']
             elif cp['kind'] == 'dip':
                 short[(c, r)] = 'p' + lab.split()[0]
@@ -637,9 +725,9 @@ def draw_bottom(lead, bare_net):
         out.append(txt(v.x(c), v.y(r) - S * 0.36, s, 7, '#000', weight='bold'))
 
     ly = TOP + BOARD_H + BOT + 6
-    out.append(txt(MX, ly, f'{len(BARE)} bare links, 0 insulated wires. Order: power (GND, 3V3, 5V), '
-                   'then the signal lanes. Tick them off in wiring_list.md.', 13, '#111', 'start',
-                   'bold', halo=False))
+    out.append(txt(MX, ly, f'{len(BARE)} bare links on this side. Dashed = the {len(JUMPERS)} insulated jumpers '
+                   'on the component side (solder their ends here). Tick everything off in wiring_list.md.',
+                   13, '#111', 'start', 'bold', halo=False))
     out.append(txt(MX, ly + 24, 'Centre stripe colour = net (same colours as the pin rings on the top view).',
                    12, '#444', 'start', halo=False))
     out.append('</svg>')
@@ -660,8 +748,14 @@ def wiring_list(lead):
     L = ['# Ropo2040 logic board: wiring checklist', '',
          'Generated by `make_layout.py`; do not edit by hand. Hole names are row letter + column '
          'number. Everything below is on the solder side, as bare 22 AWG wire (insulation '
-         'stripped) soldered at every hole it passes. There are no insulated wires.', '']
-    L.append('## Bare links, by net'), L.append('')
+         'stripped) soldered at every hole it passes, plus a few straight insulated jumpers on the '
+         'component side.', '']
+    L.append('## Insulated jumpers (component side)'), L.append('')
+    for i, (net, a, b) in enumerate(JUMPERS, 1):
+        L.append(f'- [ ] **JP{i}** `{net}`: {at(a)} → {at(b)}  ({len(seg_holes(a, b))} holes, '
+                 f'lying flat over the bare traces in between)')
+    L.append('')
+    L.append('## Bare links, by net (solder side)'), L.append('')
     for net in NET_ORDER:
         segs = [(a, b) for n, a, b in BARE if n == net]
         if not segs:
